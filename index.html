@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boston Travel Guide | 詳細ガイド</title>
+    <title>Boston Travel Guide | ルート選択型ガイド</title>
     <style>
       :root {
         --bg: #f4f7fb;
@@ -18,7 +18,6 @@
         --muted: #5d6d82;
         --line: #dde6f5;
         --shadow: 0 22px 45px rgba(17, 24, 39, 0.08);
-        --warning: #f59e0b;
       }
 
       * { box-sizing: border-box; }
@@ -52,9 +51,7 @@
       }
       .nav a:hover { background: rgba(255,255,255,0.6); color: var(--text); }
 
-      .hero {
-        padding: 54px 0 24px;
-      }
+      .hero { padding: 54px 0 24px; }
       .hero-card {
         display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 24px;
         border: 1px solid var(--line); border-radius: 28px; overflow: hidden;
@@ -66,7 +63,7 @@
         background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.75rem;
       }
       h1 {
-        margin: 18px 0 12px; font-size: clamp(2.3rem, 4.5vw, 4.1rem); line-height: 1.08; letter-spacing: -0.05em;
+        margin: 18px 0 12px; font-size: clamp(2.2rem, 4.4vw, 4rem); line-height: 1.08; letter-spacing: -0.05em;
       }
       .lead { color: var(--muted); line-height: 1.8; max-width: 60ch; font-size: 1.04rem; }
       .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
@@ -113,6 +110,21 @@
       }
       .section-heading h2 { margin: 0; font-size: clamp(1.8rem, 2.8vw, 2.6rem); letter-spacing: -0.04em; }
       .section-tag { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+      .planner-grid {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
+      }
+      .planner-card {
+        padding: 22px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 15px 30px rgba(15,23,42,0.04);
+      }
+      .planner-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
+      .planner-card p { margin: 0 0 10px; color: var(--muted); line-height: 1.7; }
+      .chip {
+        display: inline-block; padding: 7px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px;
+      }
+      .chip.harvard { background: rgba(124,58,237,0.12); color: var(--purple); }
+      .chip.mit { background: rgba(14,165,233,0.12); color: var(--sky); }
+      .chip.bu { background: rgba(249,115,22,0.12); color: var(--orange); }
 
       .area-banner {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.7);
@@ -191,9 +203,7 @@
       .route-item strong { display: block; margin-bottom: 3px; }
       .route-item span { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
 
-      .tips-grid {
-        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
-      }
+      .tips-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
       .tips-panel { padding: 22px 20px; }
       .tips-panel h3 { margin: 0 0 12px; font-size: 1.2rem; }
       .tips-panel ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.9; }
@@ -202,13 +212,13 @@
 
       @media (max-width: 980px) {
         .hero-card, .detail-grid, .map-wrap { grid-template-columns: 1fr; }
-        .spot-grid, .museum-grid, .tips-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .spot-grid, .museum-grid, .tips-grid, .planner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 680px) {
         .topbar-inner, .section-heading, .area-banner { flex-direction: column; align-items: flex-start; }
         .nav { width: 100%; }
         .nav a { flex: 1 1 auto; text-align: center; }
-        .spot-grid, .museum-grid, .tips-grid { grid-template-columns: 1fr; }
+        .spot-grid, .museum-grid, .tips-grid, .planner-grid { grid-template-columns: 1fr; }
         .hero-copy { padding: 28px 20px; }
       }
     </style>
@@ -218,12 +228,13 @@
       <div class="container topbar-inner">
         <div class="brand">Boston Guide</div>
         <nav class="nav" aria-label="main menu">
+          <a href="#planner">順番を選ぶ</a>
           <a href="#harvard">ハーバード</a>
           <a href="#mit">MIT</a>
           <a href="#bu">ボストン大学</a>
           <a href="#museum">ミュージアム</a>
-          <a href="#freedom">フリーダム・トレイル</a>
-          <a href="#airport">空港アクセス</a>
+          <a href="#freedom">フリーダム</a>
+          <a href="#airport">空港</a>
         </nav>
       </div>
     </header>
@@ -233,15 +244,15 @@
         <div class="container">
           <div class="hero-card">
             <div class="hero-copy">
-              <div class="eyebrow">Detailed Boston Travel Guide</div>
-              <h1>ボストンを3エリアで1日ずつゆっくり回る</h1>
+              <div class="eyebrow">Flexible Boston Travel Guide</div>
+              <h1>順番は自由。目的に合わせてエリアを選ぶ</h1>
               <p class="lead">
-                ハーバード大学、MIT、ボストン大学の3つを中心に、観光地・ミュージアム・移動手段・無料で楽しめるウォークまで、実際に使えるガイドとしてまとめました。
-                また、博物館・美術館の営業時間・休館日・入場料・無料の日の目安、さらに Freedom Trail の散策まで、1日観光のベースとして使いやすい内容にしています。
+                ハーバード美術館が無料の日があれば、その日に先にハーバードへ行く。MITが最初の拠点になるかもしれない。ボストン大学を夕方に回るか、朝に回るか。<br />
+                ボストンのエリアは固定順ではなく、空港アクセス・無料日・気分・移動距離で選ぶのが一番快適です。
               </p>
               <div class="hero-actions">
-                <a href="#harvard" class="btn btn-primary">ハーバード日程へ</a>
-                <a href="#freedom" class="btn btn-secondary">無料ウォークを見る</a>
+                <a href="#planner" class="btn btn-primary">順番を選ぶ</a>
+                <a href="#freedom" class="btn btn-secondary">無料散歩を見る</a>
               </div>
             </div>
             <div class="hero-visual" aria-label="Boston map overview">
@@ -261,16 +272,48 @@
         </div>
       </section>
 
+      <section id="planner">
+        <div class="container">
+          <div class="section-heading">
+            <h2>エリア選びの基準</h2>
+            <span class="section-tag">Choose your route</span>
+          </div>
+
+          <div class="planner-grid">
+            <article class="planner-card">
+              <div class="chip harvard">Harvard</div>
+              <h3>美術館や無料イベントの予定がある日</h3>
+              <p>ハーバード美術館や自然史博物館が無料・割引の条件に合う日は、朝早くからハーバードに行くのがベストです。</p>
+              <a class="meta-link" href="#harvard">ハーバードのおすすめを見る</a>
+            </article>
+
+            <article class="planner-card">
+              <div class="chip mit">MIT</div>
+              <h3>アクセス重視・最初の観光場所にしたい日</h3>
+              <p>空港から最もアクセスしやすく、MITは最初の拠点に向いています。午前中に見て、午後に移動するのがスムーズです。</p>
+              <a class="meta-link" href="#mit">MITのおすすめを見る</a>
+            </article>
+
+            <article class="planner-card">
+              <div class="chip bu">BU</div>
+              <h3>夕景・散歩・リラックスを優先したい日</h3>
+              <p>ボストン大学周辺は、夕方の川辺散歩と夜の街歩きに適しています。最後に回ると気分が良くなります。</p>
+              <a class="meta-link" href="#bu">ボストン大学のおすすめを見る</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="harvard">
         <div class="container">
           <div class="section-heading">
-            <h2>1日目：ハーバード大学エリア</h2>
+            <h2>ハーバード大学エリア</h2>
             <span class="section-tag">Harvard Area</span>
           </div>
           <div class="area-banner">
             <div>
-              <strong>学園の静けさと歴史を感じる一日</strong>
-              <small>散歩しながら建物と川辺を楽しむのが最もおすすめです</small>
+              <strong>無料日や博物館の予定が合えば、ここから始めるのが理想</strong>
+              <small>静かな学園と川辺が魅力。朝に訪れるとしっとりしていて気持ちよいです</small>
             </div>
             <span class="pill harvard">Harvard</span>
           </div>
@@ -279,33 +322,18 @@
             <div class="info-panel">
               <h3>おすすめスケジュール</h3>
               <div class="time-line">
-                <div class="time-item">
-                  <strong>09:30</strong>
-                  <span>ハーバード・ヤード到着。建物の外観と広場を散策し、学園の雰囲気を体感。</span>
-                </div>
-                <div class="time-item">
-                  <strong>11:00</strong>
-                  <span>ハーバード美術館または自然史博物館へ。展示をゆっくり見て、文化と研究の雰囲気を味わう。</span>
-                </div>
-                <div class="time-item">
-                  <strong>13:00</strong>
-                  <span>学内または大学近くのカフェで昼食。高級感のある雰囲気の中でゆっくり休憩。</span>
-                </div>
-                <div class="time-item">
-                  <strong>15:00</strong>
-                  <span>チャールズ川沿いを歩く。川辺の景色は落ち着きと都市の景観を両方感じるスポット。</span>
-                </div>
-                <div class="time-item">
-                  <strong>17:30</strong>
-                  <span>MIT方面へ移動。夕方の色が変わるボストンの街並みを楽しむ。</span>
-                </div>
+                <div class="time-item"><strong>09:30</strong><span>ハーバード・ヤードに到着。大学の建築と広場を歩く。</span></div>
+                <div class="time-item"><strong>11:00</strong><span>ハーバード美術館または自然史博物館に向かう。無料日ならこの時間が一番ありがたい。</span></div>
+                <div class="time-item"><strong>13:00</strong><span>近くのカフェで昼食。</span></div>
+                <div class="time-item"><strong>15:00</strong><span>チャールズ川沿いを散歩。</span></div>
+                <div class="time-item"><strong>17:30</strong><span>MITや市内の他エリアへ移動。</span></div>
               </div>
 
               <h3>行き方</h3>
               <div class="route-list">
-                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line で Downtown Crossing へ。そこから Red Line または Green Line で Harvard 駅へ。</p></div>
-                <div class="route-step"><div class="n">2</div><p>Harvard 駅から徒歩 8〜12 分でハーバード・ヤードに到着。</p></div>
-                <div class="route-step"><div class="n">3</div><p>MITへは Red Line で 20 分ほど、またはハーバードから 1駅程度で移動可能です。</p></div>
+                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line → Downtown Crossing → Red Line または Green Line で Harvard 駅へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>駅から徒歩 8〜12 分でハーバード・ヤード到着。</p></div>
+                <div class="route-step"><div class="n">3</div><p>MIT へは Red Line で 15〜20 分程度。</p></div>
               </div>
             </div>
 
@@ -327,13 +355,13 @@
       <section id="mit">
         <div class="container">
           <div class="section-heading">
-            <h2>2日目：MITエリア</h2>
+            <h2>MITエリア</h2>
             <span class="section-tag">MIT Area</span>
           </div>
           <div class="area-banner">
             <div>
-              <strong>テクノロジーと創造性が感じられる一日</strong>
-              <small>建築と研究の雰囲気を、室内・屋外の両方で楽しめます</small>
+              <strong>空港からのアクセスが良いので、最初の拠点にしやすい</strong>
+              <small>キャンパス散策、博物館、ケンドールスクウェアをまとめて回れる</small>
             </div>
             <span class="pill mit">MIT</span>
           </div>
@@ -342,33 +370,18 @@
             <div class="info-panel">
               <h3>おすすめスケジュール</h3>
               <div class="time-line">
-                <div class="time-item">
-                  <strong>09:30</strong>
-                  <span>MITのメインキャンパスに到着。グレート・ドームや校舎のデザインを散策。</span>
-                </div>
-                <div class="time-item">
-                  <strong>11:00</strong>
-                  <span>インフィニット・コリドーや建築群を観て、MITの空気感を体感。</span>
-                </div>
-                <div class="time-item">
-                  <strong>12:30</strong>
-                  <span>ケンドールスクウェアでランチ。周辺のカフェやお店も多く、休憩しやすい。</span>
-                </div>
-                <div class="time-item">
-                  <strong>14:30</strong>
-                  <span>MIT Museum を訪問。科学・テクノロジー・教育の視点で見るのが面白い。</span>
-                </div>
-                <div class="time-item">
-                  <strong>17:00</strong>
-                  <span>ボストン大学方面へ移動。夕方の川辺と街灯の雰囲気を楽しむ。</span>
-                </div>
+                <div class="time-item"><strong>09:30</strong><span>MIT キャンパスに到着。グレート・ドームと近くの建物を見学。</span></div>
+                <div class="time-item"><strong>11:00</strong><span>インフィニット・コリドー周辺を散策。</span></div>
+                <div class="time-item"><strong>12:30</strong><span>ケンドールスクウェアでランチ。</span></div>
+                <div class="time-item"><strong>14:30</strong><span>MIT Museum を訪問。</span></div>
+                <div class="time-item"><strong>17:00</strong><span>そのままハーバードかボストン大学方面へ移動。</span></div>
               </div>
 
               <h3>行き方</h3>
               <div class="route-list">
-                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line → Downtown Crossing → Red Line で Kendall/MIT 駅へ。</p></div>
-                <div class="route-step"><div class="n">2</div><p>駅から徒歩 5〜10 分でメインキャンパス入り口に到着。</p></div>
-                <div class="route-step"><div class="n">3</div><p>Harvard からは Red Line で約 15〜20 分ほどで移動可能。</p></div>
+                <div class="route-step"><div class="n">1</div><p>空港から Silver Line → Downtown Crossing → Red Line で Kendall/MIT 駅へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>駅から徒歩 5〜10 分でキャンパスに到着。</p></div>
+                <div class="route-step"><div class="n">3</div><p>Harvard と BU への移動は地下鉄または徒歩+乗り換えで対応可能。</p></div>
               </div>
             </div>
 
@@ -390,13 +403,13 @@
       <section id="bu">
         <div class="container">
           <div class="section-heading">
-            <h2>3日目：ボストン大学エリア</h2>
+            <h2>ボストン大学エリア</h2>
             <span class="section-tag">Boston University Area</span>
           </div>
           <div class="area-banner">
             <div>
-              <strong>学生街の賑やかさと夕景を楽しむ一日</strong>
-              <small>川辺、街歩き、夜景のバランスが良いエリアです</small>
+              <strong>夕方に回ると、川辺の景色が一番きれい</strong>
+              <small>最後に回ると旅の締めにぴったりです</small>
             </div>
             <span class="pill bu">BU</span>
           </div>
@@ -405,33 +418,18 @@
             <div class="info-panel">
               <h3>おすすめスケジュール</h3>
               <div class="time-line">
-                <div class="time-item">
-                  <strong>10:00</strong>
-                  <span>BU キャンパスを散策。開放感のある学生街の雰囲気を楽しむ。</span>
-                </div>
-                <div class="time-item">
-                  <strong>12:00</strong>
-                  <span>昼食。近くのカフェやレストランで休憩しつつ、街の雰囲気を感じる。</span>
-                </div>
-                <div class="time-item">
-                  <strong>14:00</strong>
-                  <span>BU ブリッジ周辺を散歩。川の景色と街並みが美しい時間帯。</span>
-                </div>
-                <div class="time-item">
-                  <strong>17:00</strong>
-                  <span>川沿いを歩きながら夕方の空を見て、ゆっくりした印象に。</span>
-                </div>
-                <div class="time-item">
-                  <strong>19:00</strong>
-                  <span>Fenway 地区や夜の街歩きで1日を締めくくる。</span>
-                </div>
+                <div class="time-item"><strong>10:00</strong><span>BU キャンパスを散策。</span></div>
+                <div class="time-item"><strong>12:00</strong><span>昼食。</span></div>
+                <div class="time-item"><strong>14:00</strong><span>BU ブリッジ周辺を散歩。</span></div>
+                <div class="time-item"><strong>17:00</strong><span>川沿いを歩いて夕景を楽しむ。</span></div>
+                <div class="time-item"><strong>19:00</strong><span>Fenway 地区へ。学生街の夜の雰囲気を満喫。</span></div>
               </div>
 
               <h3>行き方</h3>
               <div class="route-list">
-                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line 或いは Blue Line を利用し、Boston University 駅または近隣駅へ。</p></div>
-                <div class="route-step"><div class="n">2</div><p>キャンパスから徒歩数分で BU ブリッジや川沿いへ出られます。</p></div>
-                <div class="route-step"><div class="n">3</div><p>夜は Fenway 地区まで足を伸ばすと、ボストンらしい街の賑やかさを感じられます。</p></div>
+                <div class="route-step"><div class="n">1</div><p>空港から Blue Line や Silver Line を使って、Boston University 周辺へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>キャンパス内を歩いて、BU ブリッジや川沿いへ。</p></div>
+                <div class="route-step"><div class="n">3</div><p>夕方なら最後に回るのが一番気分がよい。</p></div>
               </div>
             </div>
 
@@ -461,34 +459,34 @@
             <article class="card museum-card">
               <h3>ハーバード美術館</h3>
               <div class="museum-meta">
-                <div><strong>営業時間:</strong> 一般的には 10:00〜17:00 付近。曜日や季節で変動あり。</div>
-                <div><strong>定休日:</strong> 公式サイトで確認が必要。特定の曜日・年末年始などで休館あり。</div>
-                <div><strong>入場料:</strong> 一般有料。大学や学生、無料イベントは条件あり。</div>
-                <div><strong>無料日:</strong> 固定の無料日がある場合もあるが、シーズンやイベントにより変動。最新情報は公式サイトを確認。</div>
+                <div><strong>営業時間:</strong> 通常 10:00〜17:00前後。季節やイベントで変動あり。</div>
+                <div><strong>定休日:</strong> 公式サイトで最新確認。</div>
+                <div><strong>入場料:</strong> 一般有料。学生・無料イベントの条件あり。</div>
+                <div><strong>無料日:</strong> 一定の無料日がある場合があるが、変動あり。</div>
               </div>
-              <div class="note">※ 公式サイトで最新の開館時間・休館日・無料日を確認するのが確実です。</div>
+              <div class="note">※ 無料日が合う日は、ハーバードを最初に回すのが効率的です。</div>
             </article>
 
             <article class="card museum-card">
               <h3>ハーバード自然史博物館</h3>
               <div class="museum-meta">
-                <div><strong>営業時間:</strong> 通常 10:00〜17:00前後。会期やイベントで変更あり。</div>
-                <div><strong>定休日:</strong> 月曜休館や特別休館があることがある。</div>
-                <div><strong>入場料:</strong> 一般有料。学校・学生・子ども料金が設定される場合あり。</div>
-                <div><strong>無料日:</strong> 定期無料日があることもあるが、公式サイトで最新確認を推奨。</div>
+                <div><strong>営業時間:</strong> 通常 10:00〜17:00前後。</div>
+                <div><strong>定休日:</strong> 月曜休館や特別休館あり。</div>
+                <div><strong>入場料:</strong> 一般有料。</div>
+                <div><strong>無料日:</strong> 無料日がある場合あり。公式で要確認。</div>
               </div>
-              <div class="note">※ 学生やハーバード関係者は割引・無料の条件がある場合があります。</div>
+              <div class="note">※ こちらも無料日や割引条件により、ハーバード優先の順番が合理的です。</div>
             </article>
 
             <article class="card museum-card">
               <h3>MIT Museum</h3>
               <div class="museum-meta">
-                <div><strong>営業時間:</strong> 一般的には 10:00〜17:00 前後。イベント開催時には延長あり。</div>
-                <div><strong>定休日:</strong> 月曜や特別休館があることがある。</div>
-                <div><strong>入場料:</strong> 一般有料。学生やMIT関係者は無料/割引の可能性あり。</div>
-                <div><strong>無料日:</strong> 定期無料イベントがある場合あり。常設無料日ではないため要確認。</div>
+                <div><strong>営業時間:</strong> 一般的には 10:00〜17:00前後。</div>
+                <div><strong>定休日:</strong> 月曜や特別休館あり。</div>
+                <div><strong>入場料:</strong> 一般有料。学生やMIT関係者は割引あり。</div>
+                <div><strong>無料日:</strong> 季まれに無料イベントあり。要確認。</div>
               </div>
-              <div class="note">※ 公式サイトのカレンダーを事前確認すると安心です。</div>
+              <div class="note">※ MIT はアクセスが良く、午前中に入ると他エリアの移動に丁度いいです。</div>
             </article>
           </div>
         </div>
@@ -505,22 +503,10 @@
             <div class="info-panel">
               <h3>Freedom Trail（フリーダム・トレイル）</h3>
               <div class="time-line">
-                <div class="time-item">
-                  <strong>開始</strong>
-                  <span>Boston Common（ボストン・コモン）からスタート。歩きやすいルートで、街の歴史を通りやすい。</span>
-                </div>
-                <div class="time-item">
-                  <strong>コース</strong>
-                  <span>Boston Common → Park Street Church → Old State House → Paul Revere House → Old North Church → Bunker Hill Monument など。</span>
-                </div>
-                <div class="time-item">
-                  <strong>料金</strong>
-                  <span>自分で歩く場合は基本無料。ガイド付きツアーは有料になることがある。</span>
-                </div>
-                <div class="time-item">
-                  <strong>おすすめ</strong>
-                  <span>朝の気持ちいい時間帯に歩くと、建物の立ち並びと街の雰囲気がよく見える。昼間でも十分楽しめる。</span>
-                </div>
+                <div class="time-item"><strong>開始</strong><span>Boston Common（ボストン・コモン）からスタート。</span></div>
+                <div class="time-item"><strong>コース</strong><span>Boston Common → Park Street Church → Old State House → Paul Revere House → Old North Church → Bunker Hill Monument など。</span></div>
+                <div class="time-item"><strong>料金</strong><span>自分で歩く場合は基本無料。ガイド付きは有料。</span></div>
+                <div class="time-item"><strong>おすすめ</strong><span>朝か夕方に歩くと、街の雰囲気がよく見える。</span></div>
               </div>
             </div>
 
@@ -566,7 +552,6 @@
                     <text x="330" y="120" text-anchor="middle" fill="#7c3aed" font-size="18" font-weight="800">ハーバード</text>
                   </g>
                 </a>
-
                 <a href="https://www.google.com/maps/search/?api=1&query=MIT+Boston" target="_blank" rel="noreferrer">
                   <g>
                     <circle cx="560" cy="240" r="16" fill="#0ea5e9"/>
@@ -574,7 +559,6 @@
                     <text x="560" y="210" text-anchor="middle" fill="#0ea5e9" font-size="18" font-weight="800">MIT</text>
                   </g>
                 </a>
-
                 <a href="https://www.google.com/maps/search/?api=1&query=Boston+University+Boston" target="_blank" rel="noreferrer">
                   <g>
                     <circle cx="350" cy="375" r="16" fill="#f97316"/>
@@ -582,7 +566,6 @@
                     <text x="350" y="410" text-anchor="middle" fill="#f97316" font-size="18" font-weight="800">BU</text>
                   </g>
                 </a>
-
                 <a href="https://www.google.com/maps/search/?api=1&query=Boston+Logan+International+Airport" target="_blank" rel="noreferrer">
                   <g>
                     <circle cx="660" cy="270" r="14" fill="#0f172a"/>
@@ -594,31 +577,11 @@
             </div>
 
             <aside class="route-panel">
-              <h3>1日ごとのおすすめ順番</h3>
+              <h3>おすすめ順番の目安</h3>
               <div class="route-list-2">
-                <div class="route-item">
-                  <div class="num">1</div>
-                  <div>
-                    <strong>MIT</strong>
-                    <span>空港に近くアクセスが良いので、最初の拠点にしやすいです。</span>
-                  </div>
-                </div>
-
-                <div class="route-item">
-                  <div class="num">2</div>
-                  <div>
-                    <strong>ハーバード大学</strong>
-                    <span>少し上側にあるので、次に上へ向かう形で回ると自然です。</span>
-                  </div>
-                </div>
-
-                <div class="route-item">
-                  <div class="num">3</div>
-                  <div>
-                    <strong>ボストン大学</strong>
-                    <span>左下寄りにあるため、最後に夕方の景色と街歩きを楽しむとよいです。</span>
-                  </div>
-                </div>
+                <div class="route-item"><div class="num">1</div><div><strong>MIT</strong><span>アクセスがよく、最初の拠点に向く。</span></div></div>
+                <div class="route-item"><div class="num">2</div><div><strong>Harvard</strong><span>無料日や美術館と合えば、ここを優先。</span></div></div>
+                <div class="route-item"><div class="num">3</div><div><strong>BU</strong><span>夕方や夜に回ると一番気分が良い。</span></div></div>
               </div>
             </aside>
           </div>
@@ -649,17 +612,17 @@
                 <li>空港駅から Blue Line に乗る</li>
                 <li>Government Center で乗り換える</li>
                 <li>市内中心部から各エリアへ移動</li>
-                <li>安くてわかりやすいルート</li>
+                <li>安くてわかりやすい</li>
               </ul>
             </div>
 
             <div class="tips-panel">
               <h3>エリア別の目安</h3>
               <ul>
-                <li>MIT：最も空港に近く、アクセスが簡単</li>
-                <li>Harvard：北側、少し離れている</li>
-                <li>BU：南西寄り、最後に回るのに向く</li>
-                <li>移動は徒歩 + 地下鉄の組み合わせが楽</li>
+                <li>MIT：最も空港に近い</li>
+                <li>Harvard：北側に少し離れる</li>
+                <li>BU：左下寄り、夕方に向く</li>
+                <li>移動は地鉄 + 徒歩が最適</li>
               </ul>
             </div>
           </div>
@@ -668,7 +631,7 @@
     </main>
 
     <footer>
-      <div class="container">Boston Travel Guide — Harvard / MIT / Boston University / Freedom Trail</div>
+      <div class="container">Boston Travel Guide — flexible route planner / Harvard / MIT / BU / Freedom Trail</div>
     </footer>
   </body>
 </html>
