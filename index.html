@@ -104,18 +104,58 @@
       .legend span { display: inline-flex; align-items: center; gap: 8px; }
       .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
 
+      .route-overview { padding: 28px 0 8px; }
+      .map-dashboard {
+        display: grid; grid-template-columns: 1.7fr 0.9fr; gap: 18px; align-items: stretch;
+      }
+      .map-stage,
+      .distance-panel,
+      .planner-card,
+      .info-panel,
+      .map-panel,
+      .route-panel,
+      .museum-panel,
+      .tips-panel {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 15px 30px rgba(15,23,42,0.04); overflow: hidden;
+      }
+      .map-stage {
+        padding: 18px;
+      }
+      .map-stage svg {
+        display: block; width: 100%; height: auto; min-height: 360px; border-radius: 18px; background: linear-gradient(180deg, #f8fbff, #edf6ff);
+      }
+      .distance-panel { padding: 20px; }
+      .distance-header {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px;
+      }
+      .distance-header h3 { margin: 0; font-size: 1.3rem; }
+      .distance-badge {
+        display: inline-flex; align-items: center; justify-content: center; padding: 8px 10px; border-radius: 999px;
+        background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+      }
+      .distance-list { display: grid; gap: 10px; }
+      .distance-item {
+        display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 10px; padding: 12px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.75);
+      }
+      .distance-num {
+        width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 900; font-size: 0.8rem;
+      }
+      .distance-item strong { display: block; margin-bottom: 2px; font-size: 0.96rem; }
+      .distance-item small { color: var(--muted); }
+      .distance-item .value { font-weight: 800; color: var(--primary); font-size: 0.86rem; }
+
       section { padding: 30px 0; }
       .section-heading {
         display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px;
       }
       .section-heading h2 { margin: 0; font-size: clamp(1.8rem, 2.8vw, 2.6rem); letter-spacing: -0.04em; }
-      .section-tag { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+      .section-tag { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 
       .planner-grid {
         display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
       }
       .planner-card {
-        padding: 22px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 15px 30px rgba(15,23,42,0.04);
+        padding: 22px 20px; 
       }
       .planner-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
       .planner-card p { margin: 0 0 10px; color: var(--muted); line-height: 1.7; }
@@ -128,7 +168,7 @@
       .chip.plan { background: rgba(15,118,110,0.12); color: var(--secondary); }
 
       .area-banner {
-        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.72);
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.76);
       }
       .area-banner strong { display: block; font-size: 1.08rem; margin-bottom: 4px; }
       .area-banner small { color: var(--muted); }
@@ -178,7 +218,7 @@
       .spot-info h3 { margin: 0 0 8px; font-size: 1.2rem; }
       .spot-info p { margin: 0 0 12px; color: var(--muted); line-height: 1.7; font-size: 0.96rem; }
       .map-link, .meta-link {
-        display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 10px; border-radius: 10px; background: rgba(29,78,216,0.06); color: var(--primary); font-size: 0.82rem; font-weight: 800;
+        display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 10px; border-radius: 10px; background: rgba(29,78,216,0.06); color: var(--primary); font-size: 0.84rem; font-weight: 700;
       }
       .map-link:hover, .meta-link:hover { background: rgba(29,78,216,0.12); }
 
@@ -214,7 +254,7 @@
       .spot-detail-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
       .spot-detail-card p { margin: 0 0 14px; color: var(--muted); line-height: 1.7; }
       .return-link {
-        display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 12px; border-radius: 10px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.8rem; font-weight: 800;
+        display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 12px; border-radius: 10px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.84rem; font-weight: 800;
       }
 
       .tips-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -225,11 +265,11 @@
       footer { padding: 18px 0 42px; text-align: center; color: var(--muted); font-size: 0.9rem; }
 
       @media (max-width: 980px) {
-        .hero-card, .detail-grid, .map-wrap { grid-template-columns: 1fr; }
+        .hero-card, .detail-grid, .map-wrap, .map-dashboard { grid-template-columns: 1fr; }
         .spot-grid, .museum-grid, .tips-grid, .planner-grid, .spot-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 680px) {
-        .topbar-inner, .section-heading, .area-banner { flex-direction: column; align-items: flex-start; }
+        .topbar-inner, .section-heading, .area-banner, .distance-header { flex-direction: column; align-items: flex-start; }
         .nav { width: 100%; }
         .nav a { flex: 1 1 auto; text-align: center; }
         .spot-grid, .museum-grid, .tips-grid, .planner-grid, .spot-detail-grid { grid-template-columns: 1fr; }
@@ -262,13 +302,11 @@
               <div class="eyebrow">Flexible Boston Travel Guide</div>
               <h1>順番は自由。目的に合わせてエリアを選ぶ</h1>
               <p class="lead">
-                ハーバード美術館が無料の日があれば、その日に先にハーバードへ行く。MITが最初の拠点になるかもしれない。ボストン大学は夕方の景色を楽しむために最後に回るのもいい。
-                ボストンの観光は、固定の「1日目・2日目・3日目」ではなく、無料日・空港アクセス・移動距離・時間帯で選ぶのが一番快適です。
-                その日の目的が決まれば、どの地域からでも出発できます。
+                ハーバード美術館が無料の日があれば、その日に先にハーバードへ行く。MITが最初の拠点になるかもしれない。ボストン大学は夕方の景色を楽しむのに最適だ。ボストンの観光は、固定の「1日目・2日目」ではなく、無料日・空港アクセス・移動距離・時間帯で選ぶのが一番快適です。全体地図を見て、次の見所までどれくらい離れているか理解できると、移動時間の見積もりが一気に楽になります。
               </p>
               <div class="hero-actions">
                 <a href="#planner" class="btn btn-primary">順番を選ぶ</a>
-                <a href="#freedom" class="btn btn-secondary">無料散歩を見る</a>
+                <a href="#overview-map" class="btn btn-secondary">全体地図を見る</a>
               </div>
             </div>
             <div class="hero-visual" aria-label="Boston map overview">
@@ -284,6 +322,118 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="route-overview" id="overview-map">
+        <div class="container">
+          <div class="section-heading">
+            <h2>全体地図＋次の見所までの距離</h2>
+            <span class="section-tag">Overview map</span>
+          </div>
+
+          <div class="map-dashboard">
+            <div class="map-stage">
+              <svg viewBox="0 0 760 440" role="img" aria-label="Boston city overview map with travel distances">
+                <defs>
+                  <linearGradient id="routeGlow" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stop-color="#c7d2fe" />
+                    <stop offset="100%" stop-color="#bfdbfe" />
+                  </linearGradient>
+                </defs>
+
+                <rect x="0" y="0" width="760" height="440" fill="#f2f8ff"/>
+                <path d="M60 120 C180 60, 260 90, 320 150 L380 210 L350 265 L250 285 L120 240 L40 190 Z" fill="rgba(124,58,237,0.08)" stroke="rgba(124,58,237,0.18)" stroke-width="2"/>
+                <path d="M325 70 C470 70, 575 120, 620 190 L710 250 L650 340 L520 350 L430 300 L360 250 Z" fill="rgba(14,165,233,0.08)" stroke="rgba(14,165,233,0.22)" stroke-width="2"/>
+                <path d="M110 270 C185 320, 260 355, 340 360 L345 400 L215 420 L90 390 L55 310 Z" fill="rgba(249,115,22,0.08)" stroke="rgba(249,115,22,0.2)" stroke-width="2"/>
+
+                <path d="M205 175 L470 210" stroke="url(#routeGlow)" stroke-width="10" stroke-linecap="round" stroke-dasharray="18 12" opacity="0.95"/>
+                <path d="M470 210 L330 310" stroke="url(#routeGlow)" stroke-width="10" stroke-linecap="round" stroke-dasharray="18 12" opacity="0.9"/>
+                <path d="M470 210 L600 250" stroke="url(#routeGlow)" stroke-width="8" stroke-linecap="round" stroke-dasharray="16 12" opacity="0.85"/>
+
+                <g>
+                  <circle cx="205" cy="175" r="18" fill="#7c3aed"/>
+                  <text x="205" y="181" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">H</text>
+                  <text x="205" y="145" text-anchor="middle" fill="#7c3aed" font-size="17" font-weight="800">Harvard</text>
+                </g>
+
+                <g>
+                  <circle cx="470" cy="210" r="18" fill="#0ea5e9"/>
+                  <text x="470" y="216" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">M</text>
+                  <text x="470" y="180" text-anchor="middle" fill="#0ea5e9" font-size="17" font-weight="800">MIT</text>
+                </g>
+
+                <g>
+                  <circle cx="330" cy="310" r="18" fill="#f97316"/>
+                  <text x="330" y="316" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">B</text>
+                  <text x="330" y="339" text-anchor="middle" fill="#f97316" font-size="17" font-weight="800">BU</text>
+                </g>
+
+                <g>
+                  <circle cx="600" cy="250" r="14" fill="#0f172a"/>
+                  <text x="600" y="255" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">L</text>
+                  <text x="600" y="220" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">空港</text>
+                </g>
+
+                <g>
+                  <circle cx="120" cy="255" r="12" fill="#10b981"/>
+                  <text x="120" y="260" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">F</text>
+                  <text x="120" y="280" text-anchor="middle" fill="#10b981" font-size="14" font-weight="700">Freedom</text>
+                </g>
+
+                <g font-size="12" fill="#475569" font-weight="700">
+                  <text x="350" y="195">徒歩 25分</text>
+                  <text x="360" y="270">徒歩 20分</text>
+                  <text x="500" y="255">10分</text>
+                </g>
+              </svg>
+            </div>
+
+            <aside class="distance-panel">
+              <div class="distance-header">
+                <h3>見所ごとの距離</h3>
+                <span class="distance-badge">徒歩時間</span>
+              </div>
+
+              <div class="distance-list">
+                <div class="distance-item">
+                  <span class="distance-num">1</span>
+                  <div>
+                    <strong>Harvard → MIT</strong>
+                    <small>ハーバード学園からケンドールへ</small>
+                  </div>
+                  <span class="value">2.3km</span>
+                </div>
+
+                <div class="distance-item">
+                  <span class="distance-num">2</span>
+                  <div>
+                    <strong>MIT → BU</strong>
+                    <small>チャールズ川沿いを横断</small>
+                  </div>
+                  <span class="value">3.1km</span>
+                </div>
+
+                <div class="distance-item">
+                  <span class="distance-num">3</span>
+                  <div>
+                    <strong>BU → Freedom</strong>
+                    <small>夕方の散歩にちょうどいい距離</small>
+                  </div>
+                  <span class="value">1.2km</span>
+                </div>
+
+                <div class="distance-item">
+                  <span class="distance-num">4</span>
+                  <div>
+                    <strong>MIT → 空港</strong>
+                    <small>アクセス重視なら最もラク</small>
+                  </div>
+                  <span class="value">4.8km</span>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -331,14 +481,14 @@
             <article class="planner-card">
               <div class="chip plan">パターン1</div>
               <h3>文化施設重視なら</h3>
-              <p>ハーバードの美術館や自然史博物館の予定が合うなら、朝のハーバードを先に回るのがベストです。そのあとMITや市内へ移動して、午後を散策に充てます。</p>
+              <p>ハーバードの美術館や自然史博物館の予定が合うなら、朝のハーバードを先に回るのがベストです。そのあとMITや市内へ移動して、午後に街歩きを楽しめます。</p>
               <a class="meta-link" href="#harvard">Harvard → MIT の流れを見る</a>
             </article>
 
             <article class="planner-card">
               <div class="chip plan">パターン2</div>
               <h3>空港アクセス重視なら</h3>
-              <p>最初の観光をMITにするのが最も無理がありません。空港からのアクセスがよく、キャンパス散策とケンドールスクウェアが短時間で回しやすいです。</p>
+              <p>最初の観光をMITにするのが最も無理がありません。空港からのアクセスがよく、キャンパス散策とケンドールスクウェアが短時間で回れます。</p>
               <a class="meta-link" href="#mit">MIT → Harvard の流れを見る</a>
             </article>
 
@@ -579,7 +729,7 @@
       <section id="map">
         <div class="container">
           <div class="section-heading">
-            <h2>エリアマップ</h2>
+            <h2>エリアマップ / 次の見所までの距離</h2>
             <span class="section-tag">Map</span>
           </div>
 
@@ -630,8 +780,8 @@
               <h3>おすすめ順番の目安</h3>
               <div class="route-list-2">
                 <div class="route-item"><div class="num">1</div><div><strong>目的で選ぶ</strong><span>無料日なら Harvard、アクセス重視なら MIT、夕景なら BU。</span></div></div>
-                <div class="route-item"><div class="num">2</div><div><strong>移動を考える</strong><span>MIT は空港に近く、Harvard と BU は市内の移動で組み合わせやすい。</span></div></div>
-                <div class="route-item"><div class="num">3</div><div><strong>時間帯で調整</strong><span>朝に静かなエリア、夕方に川辺や景色を楽しむのが満足度が高い。</span></div></div>
+                <div class="route-item"><div class="num">2</div><div><strong>移動を考える</strong><span>MIT は空港に近く、Harvard と BU は市内の移動で組み合わせやすいです。</span></div></div>
+                <div class="route-item"><div class="num">3</div><div><strong>時間帯で調整</strong><span>朝に静かなエリア、夕方に川辺や景色を楽しむのが満足度が高いです。</span></div></div>
               </div>
             </aside>
           </div>
@@ -647,7 +797,7 @@
             <article class="spot-detail-card" id="mit-spot">
               <div class="chip mit">MIT</div>
               <h3>MIT キャンパス</h3>
-              <p>空港アクセスが良く、最初の観光地点として最適です。グレート・ドームとインフィニット・コリドーを歩くと、街の流れが一気に見えてきます。</p>
+              <p>空港アクセスが良く、最初の観光地点として最適です。グレート・ドームとインフィニット・コリドーを歩くと、街の流れが一気にわかります。</p>
               <a class="return-link" href="#map">マップへ戻る</a>
             </article>
 
