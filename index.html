@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boston Travel Guide</title>
+    <title>Boston Travel Guide | 詳細ガイド</title>
     <style>
       :root {
         --bg: #f4f7fb;
@@ -18,12 +18,11 @@
         --muted: #5d6d82;
         --line: #dde6f5;
         --shadow: 0 22px 45px rgba(17, 24, 39, 0.08);
+        --warning: #f59e0b;
       }
 
       * { box-sizing: border-box; }
-
       html { scroll-behavior: smooth; }
-
       body {
         margin: 0;
         font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", sans-serif;
@@ -33,512 +32,184 @@
           var(--bg);
         color: var(--text);
       }
-
       a { color: inherit; text-decoration: none; }
-
-      .container {
-        width: min(1180px, calc(100% - 28px));
-        margin: 0 auto;
-      }
+      img { max-width: 100%; }
+      .container { width: min(1180px, calc(100% - 28px)); margin: 0 auto; }
 
       .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: rgba(255,255,255,0.75);
-        backdrop-filter: blur(10px);
+        position: sticky; top: 0; z-index: 30;
+        background: rgba(255,255,255,0.75); backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--line);
       }
-
       .topbar-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 74px;
-        gap: 20px;
+        display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 18px;
       }
-
-      .brand {
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
+      .brand { font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+      .nav { display: flex; flex-wrap: wrap; gap: 12px; }
       .nav a {
-        color: var(--muted);
-        font-weight: 700;
-        padding: 9px 12px;
-        border-radius: 999px;
+        color: var(--muted); font-weight: 700; padding: 9px 12px; border-radius: 999px;
         transition: all 0.2s ease;
       }
-
-      .nav a:hover {
-        background: rgba(255,255,255,0.6);
-        color: var(--text);
-      }
+      .nav a:hover { background: rgba(255,255,255,0.6); color: var(--text); }
 
       .hero {
-        padding: 54px 0 30px;
+        padding: 54px 0 24px;
       }
-
       .hero-card {
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 24px;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        background: linear-gradient(135deg, rgba(29,78,216,0.07), rgba(15,118,110,0.06));
-        box-shadow: var(--shadow);
+        display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 24px;
+        border: 1px solid var(--line); border-radius: 28px; overflow: hidden;
+        background: linear-gradient(135deg, rgba(29,78,216,0.07), rgba(15,118,110,0.06)); box-shadow: var(--shadow);
       }
-
-      .hero-copy {
-        padding: 42px 34px;
-      }
-
+      .hero-copy { padding: 38px 34px; }
       .eyebrow {
-        display: inline-flex;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(29,78,216,0.08);
-        color: var(--primary);
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-size: 0.76rem;
+        display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 999px;
+        background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.75rem;
       }
-
       h1 {
-        margin: 18px 0 14px;
-        font-size: clamp(2.2rem, 5vw, 4rem);
-        line-height: 1.06;
-        letter-spacing: -0.05em;
+        margin: 18px 0 12px; font-size: clamp(2.3rem, 4.5vw, 4.1rem); line-height: 1.08; letter-spacing: -0.05em;
       }
-
-      .lead {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.8;
-        font-size: 1.04rem;
-        max-width: 60ch;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
-      }
-
+      .lead { color: var(--muted); line-height: 1.8; max-width: 60ch; font-size: 1.04rem; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
       .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 14px;
-        border: 1px solid transparent;
-        font-weight: 800;
-        transition: transform 0.2s ease;
+        display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 18px; border-radius: 14px; border: 1px solid transparent; font-weight: 800; transition: transform 0.2s ease;
       }
-
-      .btn:hover {
-        transform: translateY(-1px);
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        box-shadow: 0 14px 25px rgba(29,78,216,0.18);
-      }
-
-      .btn-secondary {
-        background: rgba(255,255,255,0.8);
-        color: var(--primary);
-        border-color: rgba(29,78,216,0.12);
-      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 14px 25px rgba(29,78,216,0.18); }
+      .btn-secondary { background: rgba(255,255,255,0.8); color: var(--primary); border-color: rgba(29,78,216,0.12); }
 
       .hero-visual {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background:
+        display: flex; align-items: center; justify-content: center; padding: 20px; background:
           linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.1)),
           linear-gradient(135deg, rgba(124,58,237,0.08), rgba(14,165,233,0.14), rgba(249,115,22,0.09));
       }
-
       .map-mini {
-        position: relative;
-        width: min(100%, 420px);
-        aspect-ratio: 1;
-        border-radius: 26px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(239,246,255,0.66));
-        border: 1px solid rgba(29,78,216,0.12);
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
-        overflow: hidden;
+        position: relative; width: min(100%, 420px); aspect-ratio: 1; border-radius: 26px; overflow: hidden; border: 1px solid rgba(29,78,216,0.12);
+        background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(239,246,255,0.66)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
       }
-
-      .map-mini::before {
-        content: "";
-        position: absolute;
-        inset: 18px 18px 18px 18px;
-        border-radius: 24px;
-        background:
+      .map-mini::before { content: ""; position: absolute; inset: 18px; border-radius: 24px; background:
           radial-gradient(circle at 18% 24%, rgba(124,58,237,0.14), transparent 18%),
           radial-gradient(circle at 56% 40%, rgba(14,165,233,0.16), transparent 30%),
           radial-gradient(circle at 72% 70%, rgba(249,115,22,0.14), transparent 22%),
           repeating-linear-gradient(to right, rgba(148,163,184,0.12) 0, rgba(148,163,184,0.12) 1px, transparent 1px, transparent 30px),
-          repeating-linear-gradient(to bottom, rgba(148,163,184,0.12) 0, rgba(148,163,184,0.12) 1px, transparent 1px, transparent 30px);
-      }
-
+          repeating-linear-gradient(to bottom, rgba(148,163,184,0.12) 0, rgba(148,163,184,0.12) 1px, transparent 1px, transparent 30px); }
       .marker {
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        border: 3px solid rgba(255,255,255,0.9);
-        box-shadow: 0 10px 20px rgba(15,23,42,0.18);
-        z-index: 1;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-size: 0.56rem;
-        font-weight: 900;
+        position: absolute; width: 16px; height: 16px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.9);
+        box-shadow: 0 10px 20px rgba(15,23,42,0.18); display: grid; place-items: center; z-index: 1; color: white; font-size: 0.56rem; font-weight: 900;
       }
-
       .marker.harvard { left: 30%; top: 24%; background: var(--purple); }
       .marker.mit { left: 52%; top: 44%; background: var(--sky); }
       .marker.bu { left: 70%; top: 68%; background: var(--orange); }
       .marker.airport { left: 22%; top: 66%; background: #0f172a; }
-
       .legend {
-        position: absolute;
-        left: 20px;
-        bottom: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        background: rgba(255,255,255,0.84);
-        border: 1px solid rgba(29,78,216,0.08);
-        border-radius: 12px;
-        padding: 10px 12px;
-        font-size: 0.72rem;
-        color: var(--muted);
-        font-weight: 700;
+        position: absolute; left: 20px; bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;
+        background: rgba(255,255,255,0.84); border: 1px solid rgba(29,78,216,0.08); border-radius: 12px; padding: 10px 12px; font-size: 0.72rem; color: var(--muted); font-weight: 700;
       }
-
       .legend span { display: inline-flex; align-items: center; gap: 8px; }
-      .legend i {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
+      .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
 
-      section {
-        padding: 30px 0;
-      }
-
+      section { padding: 30px 0; }
       .section-heading {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 18px;
-        margin-bottom: 18px;
+        display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px;
       }
-
-      .section-heading h2 {
-        margin: 0;
-        font-size: clamp(1.7rem, 2.7vw, 2.6rem);
-        letter-spacing: -0.04em;
-      }
-
-      .section-tag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(15,118,110,0.08);
-        color: var(--secondary);
-        font-size: 0.74rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
+      .section-heading h2 { margin: 0; font-size: clamp(1.8rem, 2.8vw, 2.6rem); letter-spacing: -0.04em; }
+      .section-tag { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 
       .area-banner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 18px;
-        padding: 18px 20px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255,255,255,0.72);
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.7);
       }
-
-      .area-banner strong {
-        display: block;
-        font-size: 1.1rem;
-        margin-bottom: 4px;
-      }
-
-      .area-banner small {
-        color: var(--muted);
-      }
-
+      .area-banner strong { display: block; font-size: 1.08rem; margin-bottom: 4px; }
+      .area-banner small { color: var(--muted); }
       .pill {
-        display: inline-flex;
-        padding: 8px 12px;
-        border-radius: 999px;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        display: inline-flex; padding: 8px 12px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
       }
-
       .pill.harvard { background: rgba(124,58,237,0.12); color: var(--purple); }
       .pill.mit { background: rgba(14,165,233,0.12); color: var(--sky); }
       .pill.bu { background: rgba(249,115,22,0.12); color: var(--orange); }
 
-      .spot-grid,
-      .course-grid,
-      .airport-grid {
-        display: grid;
-        gap: 18px;
+      .detail-grid {
+        display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px;
       }
-
-      .spot-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .airport-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-      .card {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 15px 30px rgba(15,23,42,0.04);
+      .info-panel, .map-panel, .route-panel, .museum-panel, .tips-panel {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 15px 30px rgba(15,23,42,0.04); overflow: hidden;
       }
-
-      .spot-card {
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
+      .info-panel { padding: 22px 20px; }
+      .info-panel h3 { margin: 0 0 14px; font-size: 1.3rem; }
+      .time-line {
+        display: grid; gap: 12px; margin-bottom: 16px;
       }
+      .time-item {
+        display: grid; grid-template-columns: 82px 1fr; gap: 12px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,0.74);
+      }
+      .time-item strong { color: var(--primary); }
+      .time-item span { color: var(--muted); line-height: 1.7; }
+      .route-list { display: grid; gap: 10px; }
+      .route-step {
+        display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; padding: 10px 12px; background: rgba(255,255,255,0.6); border: 1px solid var(--line); border-radius: 12px;
+      }
+      .route-step .n { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 900; }
+      .route-step p { margin: 0; color: var(--muted); line-height: 1.7; }
 
+      .spot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+      .card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(15,23,42,0.04); }
+      .spot-card { display: flex; flex-direction: column; min-height: 100%; }
       .spot-thumb {
-        height: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        background: linear-gradient(135deg, rgba(29,78,216,0.07), rgba(15,118,110,0.07));
-        border-bottom: 1px solid var(--line);
+        height: 150px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(135deg, rgba(29,78,216,0.07), rgba(15,118,110,0.07)); border-bottom: 1px solid var(--line);
       }
-
-      .spot-info {
-        padding: 18px 18px 20px;
-      }
-
+      .spot-info { padding: 18px 18px 20px; }
       .spot-type {
-        display: inline-block;
-        margin-bottom: 10px;
-        padding: 6px 9px;
-        border-radius: 999px;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
+        display: inline-block; margin-bottom: 10px; padding: 6px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
       }
-
       .spot-type.harvard { background: rgba(124,58,237,0.12); color: var(--purple); }
       .spot-type.mit { background: rgba(14,165,233,0.12); color: var(--sky); }
       .spot-type.bu { background: rgba(249,115,22,0.12); color: var(--orange); }
+      .spot-info h3 { margin: 0 0 8px; font-size: 1.2rem; }
+      .spot-info p { margin: 0 0 12px; color: var(--muted); line-height: 1.7; font-size: 0.96rem; }
+      .map-link, .meta-link {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 10px; border-radius: 10px; background: rgba(29,78,216,0.06); color: var(--primary); font-size: 0.78rem; font-weight: 800; border: 1px solid rgba(29,78,216,0.08);
+      }
+      .map-link:hover, .meta-link:hover { background: rgba(29,78,216,0.12); }
 
-      .spot-info h3 {
-        margin: 0 0 8px;
-        font-size: 1.2rem;
+      .museum-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+      .museum-card { padding: 22px 20px; }
+      .museum-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
+      .museum-meta { display: grid; gap: 8px; }
+      .museum-meta div {
+        padding: 8px 10px; border-radius: 10px; background: rgba(255,255,255,0.7); border: 1px solid var(--line); color: var(--muted); line-height: 1.7;
+      }
+      .museum-meta strong { color: var(--text); }
+      .note {
+        margin-top: 10px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.18); border-radius: 12px; padding: 10px 12px; color: #8a5600; font-size: 0.84rem; line-height: 1.6; font-weight: 700;
       }
 
-      .spot-info p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.7;
-        font-size: 0.96rem;
-      }
+      .map-wrap { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 20px; }
+      .map-svg { display: block; width: 100%; min-height: 420px; height: auto; }
+      .route-panel { padding: 22px 20px; }
+      .route-panel h3 { margin: 0 0 14px; font-size: 1.35rem; }
+      .route-list-2 { display: grid; gap: 12px; }
+      .route-item { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.75); padding: 12px; }
+      .route-item .num { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 900; }
+      .route-item strong { display: block; margin-bottom: 3px; }
+      .route-item span { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
 
-      .course-card {
-        padding: 22px 20px;
+      .tips-grid {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
       }
+      .tips-panel { padding: 22px 20px; }
+      .tips-panel h3 { margin: 0 0 12px; font-size: 1.2rem; }
+      .tips-panel ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.9; }
 
-      .course-time {
-        display: inline-block;
-        margin-bottom: 12px;
-        color: var(--primary);
-        font-size: 0.8rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .course-card h3 {
-        margin: 0 0 10px;
-        font-size: 1.25rem;
-      }
-
-      .course-card ol {
-        margin: 0;
-        padding-left: 18px;
-        color: var(--muted);
-        line-height: 1.9;
-      }
-
-      .map-wrap {
-        display: grid;
-        grid-template-columns: 1.06fr 0.94fr;
-        gap: 20px;
-      }
-
-      .map-panel, .route-panel {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        box-shadow: 0 15px 30px rgba(15,23,42,0.04);
-        overflow: hidden;
-      }
-
-      .map-svg {
-        display: block;
-        width: 100%;
-        min-height: 420px;
-        height: auto;
-      }
-
-      .route-panel {
-        padding: 22px 20px;
-      }
-
-      .route-panel h3 {
-        margin: 0 0 14px;
-        font-size: 1.35rem;
-      }
-
-      .route-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      .route-item {
-        display: grid;
-        grid-template-columns: 42px 1fr;
-        gap: 12px;
-        align-items: center;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: rgba(255,255,255,0.75);
-        padding: 12px;
-      }
-
-      .route-num {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: rgba(29,78,216,0.08);
-        color: var(--primary);
-        font-weight: 900;
-      }
-
-      .route-item strong {
-        display: block;
-        margin-bottom: 3px;
-      }
-
-      .route-item span {
-        color: var(--muted);
-        font-size: 0.88rem;
-        line-height: 1.6;
-      }
-
-      .airport-card {
-        padding: 22px 20px;
-      }
-
-      .airport-card h3 {
-        margin: 0 0 10px;
-        font-size: 1.2rem;
-      }
-
-      .airport-card ul {
-        margin: 0;
-        padding-left: 18px;
-        line-height: 1.9;
-        color: var(--muted);
-      }
-
-      .airport-card .time {
-        margin-top: 14px;
-        border-top: 1px solid var(--line);
-        padding-top: 12px;
-        color: var(--text);
-        font-weight: 800;
-      }
-
-      footer {
-        padding: 18px 0 42px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
+      footer { padding: 18px 0 42px; text-align: center; color: var(--muted); font-size: 0.9rem; }
 
       @media (max-width: 980px) {
-        .hero-card,
-        .map-wrap {
-          grid-template-columns: 1fr;
-        }
-
-        .spot-grid,
-        .course-grid,
-        .airport-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+        .hero-card, .detail-grid, .map-wrap { grid-template-columns: 1fr; }
+        .spot-grid, .museum-grid, .tips-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
-
       @media (max-width: 680px) {
-        .topbar-inner, .section-heading, .area-banner {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .nav {
-          width: 100%;
-        }
-
-        .nav a {
-          flex: 1 1 auto;
-          text-align: center;
-        }
-
-        .spot-grid,
-        .course-grid,
-        .airport-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-copy {
-          padding: 28px 20px;
-        }
+        .topbar-inner, .section-heading, .area-banner { flex-direction: column; align-items: flex-start; }
+        .nav { width: 100%; }
+        .nav a { flex: 1 1 auto; text-align: center; }
+        .spot-grid, .museum-grid, .tips-grid { grid-template-columns: 1fr; }
+        .hero-copy { padding: 28px 20px; }
       }
     </style>
   </head>
@@ -550,8 +221,8 @@
           <a href="#harvard">ハーバード</a>
           <a href="#mit">MIT</a>
           <a href="#bu">ボストン大学</a>
-          <a href="#courses">モデルコース</a>
-          <a href="#map">マップ</a>
+          <a href="#museum">ミュージアム</a>
+          <a href="#freedom">フリーダム・トレイル</a>
           <a href="#airport">空港アクセス</a>
         </nav>
       </div>
@@ -562,18 +233,17 @@
         <div class="container">
           <div class="hero-card">
             <div class="hero-copy">
-              <div class="eyebrow">Boston Travel Guide</div>
-              <h1>ボストンの見どころを、3つのエリアで楽しむ</h1>
+              <div class="eyebrow">Detailed Boston Travel Guide</div>
+              <h1>ボストンを3エリアで1日ずつゆっくり回る</h1>
               <p class="lead">
-                ハーバード大学の雰囲気、MITの先進的な街並み、ボストン大学周辺の活気ある地域。
-                ボストンは「知性」と「海の風」を感じられる街です。1日から2日で回れるおすすめの見どころと交通案内をまとめました。
+                ハーバード大学、MIT、ボストン大学の3つを中心に、観光地・ミュージアム・移動手段・無料で楽しめるウォークまで、実際に使えるガイドとしてまとめました。
+                また、博物館・美術館の営業時間・休館日・入場料・無料の日の目安、さらに Freedom Trail の散策まで、1日観光のベースとして使いやすい内容にしています。
               </p>
               <div class="hero-actions">
-                <a href="#courses" class="btn btn-primary">モデルコースを見る</a>
-                <a href="#airport" class="btn btn-secondary">空港からの行き方</a>
+                <a href="#harvard" class="btn btn-primary">ハーバード日程へ</a>
+                <a href="#freedom" class="btn btn-secondary">無料ウォークを見る</a>
               </div>
             </div>
-
             <div class="hero-visual" aria-label="Boston map overview">
               <div class="map-mini">
                 <div class="marker harvard">H</div>
@@ -594,54 +264,62 @@
       <section id="harvard">
         <div class="container">
           <div class="section-heading">
-            <h2>ハーバード大学エリア</h2>
-            <span class="section-tag">Campus & Arts</span>
+            <h2>1日目：ハーバード大学エリア</h2>
+            <span class="section-tag">Harvard Area</span>
           </div>
-
           <div class="area-banner">
             <div>
-              <strong>歴史と静かな学園の雰囲気</strong>
-              <small>川沿いの散歩と落ち着いた建築が魅力です</small>
+              <strong>学園の静けさと歴史を感じる一日</strong>
+              <small>散歩しながら建物と川辺を楽しむのが最もおすすめです</small>
             </div>
             <span class="pill harvard">Harvard</span>
           </div>
 
-          <div class="spot-grid">
-            <article class="card spot-card">
-              <div class="spot-thumb">🏛️</div>
-              <div class="spot-info">
-                <div class="spot-type harvard">大学</div>
-                <h3>ハーバード・ヤード</h3>
-                <p>大学の象徴的な広場。歴史ある建物の並びと静かな雰囲気が、ボストンの中でも特に落ち着いた空間です。</p>
+          <div class="detail-grid">
+            <div class="info-panel">
+              <h3>おすすめスケジュール</h3>
+              <div class="time-line">
+                <div class="time-item">
+                  <strong>09:30</strong>
+                  <span>ハーバード・ヤード到着。建物の外観と広場を散策し、学園の雰囲気を体感。</span>
+                </div>
+                <div class="time-item">
+                  <strong>11:00</strong>
+                  <span>ハーバード美術館または自然史博物館へ。展示をゆっくり見て、文化と研究の雰囲気を味わう。</span>
+                </div>
+                <div class="time-item">
+                  <strong>13:00</strong>
+                  <span>学内または大学近くのカフェで昼食。高級感のある雰囲気の中でゆっくり休憩。</span>
+                </div>
+                <div class="time-item">
+                  <strong>15:00</strong>
+                  <span>チャールズ川沿いを歩く。川辺の景色は落ち着きと都市の景観を両方感じるスポット。</span>
+                </div>
+                <div class="time-item">
+                  <strong>17:30</strong>
+                  <span>MIT方面へ移動。夕方の色が変わるボストンの街並みを楽しむ。</span>
+                </div>
               </div>
-            </article>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">📚</div>
-              <div class="spot-info">
-                <div class="spot-type harvard">文化</div>
-                <h3>ハーバード美術館</h3>
-                <p>世界の名作と多彩なコレクションが揃う美術館。ゆっくり見学したい人におすすめです。</p>
+              <h3>行き方</h3>
+              <div class="route-list">
+                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line で Downtown Crossing へ。そこから Red Line または Green Line で Harvard 駅へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>Harvard 駅から徒歩 8〜12 分でハーバード・ヤードに到着。</p></div>
+                <div class="route-step"><div class="n">3</div><p>MITへは Red Line で 20 分ほど、またはハーバードから 1駅程度で移動可能です。</p></div>
               </div>
-            </article>
+            </div>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">🌊</div>
-              <div class="spot-info">
-                <div class="spot-type harvard">景観</div>
-                <h3>チャールズ川沿い</h3>
-                <p>散歩やサイクリングにぴったり。川辺の景色は、都市の空気と大学の落ち着きを同時に楽しめます。</p>
+            <div class="map-panel">
+              <div style="padding: 18px 18px 0;">
+                <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
               </div>
-            </article>
-
-            <article class="card spot-card">
-              <div class="spot-thumb">🎭</div>
-              <div class="spot-info">
-                <div class="spot-type harvard">観光</div>
-                <h3>スミス・キャンパス・センター</h3>
-                <p>カフェやギャラリーがあり、学内の交流の中心地として賑わっています。</p>
+              <div style="padding: 18px; display: grid; gap: 12px;">
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Harvard+Yard+Boston" target="_blank" rel="noreferrer">📍 ハーバード・ヤード</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Harvard+Museum+of+Art+Boston" target="_blank" rel="noreferrer">📍 ハーバード美術館</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Charles+River+Esplanade+Boston" target="_blank" rel="noreferrer">📍 チャールズ川沿い</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Smith+Campus+Center+Harvard+Boston" target="_blank" rel="noreferrer">📍 スミス・キャンパス・センター</a>
               </div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
@@ -649,54 +327,62 @@
       <section id="mit">
         <div class="container">
           <div class="section-heading">
-            <h2>MITエリア</h2>
-            <span class="section-tag">Innovation & tech</span>
+            <h2>2日目：MITエリア</h2>
+            <span class="section-tag">MIT Area</span>
           </div>
-
           <div class="area-banner">
             <div>
-              <strong>テクノロジーと発想が集まる街</strong>
-              <small>建築と研究のエネルギーが、街の空気感に表れています</small>
+              <strong>テクノロジーと創造性が感じられる一日</strong>
+              <small>建築と研究の雰囲気を、室内・屋外の両方で楽しめます</small>
             </div>
             <span class="pill mit">MIT</span>
           </div>
 
-          <div class="spot-grid">
-            <article class="card spot-card">
-              <div class="spot-thumb">🏫</div>
-              <div class="spot-info">
-                <div class="spot-type mit">象徴</div>
-                <h3>グレート・ドーム</h3>
-                <p>MITのシンボルである丸い大きなドーム。キャンパスの大きな見どころです。</p>
+          <div class="detail-grid">
+            <div class="info-panel">
+              <h3>おすすめスケジュール</h3>
+              <div class="time-line">
+                <div class="time-item">
+                  <strong>09:30</strong>
+                  <span>MITのメインキャンパスに到着。グレート・ドームや校舎のデザインを散策。</span>
+                </div>
+                <div class="time-item">
+                  <strong>11:00</strong>
+                  <span>インフィニット・コリドーや建築群を観て、MITの空気感を体感。</span>
+                </div>
+                <div class="time-item">
+                  <strong>12:30</strong>
+                  <span>ケンドールスクウェアでランチ。周辺のカフェやお店も多く、休憩しやすい。</span>
+                </div>
+                <div class="time-item">
+                  <strong>14:30</strong>
+                  <span>MIT Museum を訪問。科学・テクノロジー・教育の視点で見るのが面白い。</span>
+                </div>
+                <div class="time-item">
+                  <strong>17:00</strong>
+                  <span>ボストン大学方面へ移動。夕方の川辺と街灯の雰囲気を楽しむ。</span>
+                </div>
               </div>
-            </article>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">🧭</div>
-              <div class="spot-info">
-                <div class="spot-type mit">散策</div>
-                <h3>インフィニット・コリドー</h3>
-                <p>長い廊下と学生の活気が感じられる場所。MITの知性と創造性を体感できます。</p>
+              <h3>行き方</h3>
+              <div class="route-list">
+                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line → Downtown Crossing → Red Line で Kendall/MIT 駅へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>駅から徒歩 5〜10 分でメインキャンパス入り口に到着。</p></div>
+                <div class="route-step"><div class="n">3</div><p>Harvard からは Red Line で約 15〜20 分ほどで移動可能。</p></div>
               </div>
-            </article>
+            </div>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">🧪</div>
-              <div class="spot-info">
-                <div class="spot-type mit">科学</div>
-                <h3>MIT ミュージアム</h3>
-                <p>科学や技術への興味を持つ人におすすめの展示が多く、最先端の発想に触れられます。</p>
+            <div class="map-panel">
+              <div style="padding: 18px 18px 0;">
+                <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
               </div>
-            </article>
-
-            <article class="card spot-card">
-              <div class="spot-thumb">🍽️</div>
-              <div class="spot-info">
-                <div class="spot-type mit">暮らし</div>
-                <h3>ケンドールスクウェア</h3>
-                <p>スタートアップが集まるエリアで、ランチやカフェタイムも楽しめます。</p>
+              <div style="padding: 18px; display: grid; gap: 12px;">
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Great+Dome+MIT+Boston" target="_blank" rel="noreferrer">📍 グレート・ドーム</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Infinite+Corridor+MIT+Boston" target="_blank" rel="noreferrer">📍 インフィニット・コリドー</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=MIT+Museum+Boston" target="_blank" rel="noreferrer">📍 MIT Museum</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kendall+Square+Boston" target="_blank" rel="noreferrer">📍 ケンドールスクウェア</a>
               </div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
@@ -704,95 +390,152 @@
       <section id="bu">
         <div class="container">
           <div class="section-heading">
-            <h2>ボストン大学エリア</h2>
-            <span class="section-tag">Campus & riverfront</span>
+            <h2>3日目：ボストン大学エリア</h2>
+            <span class="section-tag">Boston University Area</span>
           </div>
-
           <div class="area-banner">
             <div>
-              <strong>大学町の賑やかさと川辺の余裕</strong>
-              <small>学生らしい活気と、夕方のリラックスした気分が特徴です</small>
+              <strong>学生街の賑やかさと夕景を楽しむ一日</strong>
+              <small>川辺、街歩き、夜景のバランスが良いエリアです</small>
             </div>
             <span class="pill bu">BU</span>
           </div>
 
-          <div class="spot-grid">
-            <article class="card spot-card">
-              <div class="spot-thumb">🌉</div>
-              <div class="spot-info">
-                <div class="spot-type bu">景観</div>
-                <h3>BU ブリッジ</h3>
-                <p>川の景色と街並みを一緒に見られる写真スポット。夕方の景色が特におすすめです。</p>
+          <div class="detail-grid">
+            <div class="info-panel">
+              <h3>おすすめスケジュール</h3>
+              <div class="time-line">
+                <div class="time-item">
+                  <strong>10:00</strong>
+                  <span>BU キャンパスを散策。開放感のある学生街の雰囲気を楽しむ。</span>
+                </div>
+                <div class="time-item">
+                  <strong>12:00</strong>
+                  <span>昼食。近くのカフェやレストランで休憩しつつ、街の雰囲気を感じる。</span>
+                </div>
+                <div class="time-item">
+                  <strong>14:00</strong>
+                  <span>BU ブリッジ周辺を散歩。川の景色と街並みが美しい時間帯。</span>
+                </div>
+                <div class="time-item">
+                  <strong>17:00</strong>
+                  <span>川沿いを歩きながら夕方の空を見て、ゆっくりした印象に。</span>
+                </div>
+                <div class="time-item">
+                  <strong>19:00</strong>
+                  <span>Fenway 地区や夜の街歩きで1日を締めくくる。</span>
+                </div>
               </div>
+
+              <h3>行き方</h3>
+              <div class="route-list">
+                <div class="route-step"><div class="n">1</div><p>空港からは Silver Line 或いは Blue Line を利用し、Boston University 駅または近隣駅へ。</p></div>
+                <div class="route-step"><div class="n">2</div><p>キャンパスから徒歩数分で BU ブリッジや川沿いへ出られます。</p></div>
+                <div class="route-step"><div class="n">3</div><p>夜は Fenway 地区まで足を伸ばすと、ボストンらしい街の賑やかさを感じられます。</p></div>
+              </div>
+            </div>
+
+            <div class="map-panel">
+              <div style="padding: 18px 18px 0;">
+                <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
+              </div>
+              <div style="padding: 18px; display: grid; gap: 12px;">
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Boston+University+Bridge+Boston" target="_blank" rel="noreferrer">📍 BU ブリッジ</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Boston+University+Campus+Boston" target="_blank" rel="noreferrer">📍 ボストン大学キャンパス</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Fenway+Park+Boston" target="_blank" rel="noreferrer">📍 フェンウェイ地区</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Charles+River+Boston" target="_blank" rel="noreferrer">📍 川沿い散歩</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="museum">
+        <div class="container">
+          <div class="section-heading">
+            <h2>博物館・美術館の基礎情報</h2>
+            <span class="section-tag">Museum Info</span>
+          </div>
+
+          <div class="museum-grid">
+            <article class="card museum-card">
+              <h3>ハーバード美術館</h3>
+              <div class="museum-meta">
+                <div><strong>営業時間:</strong> 一般的には 10:00〜17:00 付近。曜日や季節で変動あり。</div>
+                <div><strong>定休日:</strong> 公式サイトで確認が必要。特定の曜日・年末年始などで休館あり。</div>
+                <div><strong>入場料:</strong> 一般有料。大学や学生、無料イベントは条件あり。</div>
+                <div><strong>無料日:</strong> 固定の無料日がある場合もあるが、シーズンやイベントにより変動。最新情報は公式サイトを確認。</div>
+              </div>
+              <div class="note">※ 公式サイトで最新の開館時間・休館日・無料日を確認するのが確実です。</div>
             </article>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">🌊</div>
-              <div class="spot-info">
-                <div class="spot-type bu">自然</div>
-                <h3>ボストン大学ビーチ</h3>
-                <p>近くの海辺で休憩や散歩ができ、緩い気分でボストンの街を感じられます。</p>
+            <article class="card museum-card">
+              <h3>ハーバード自然史博物館</h3>
+              <div class="museum-meta">
+                <div><strong>営業時間:</strong> 通常 10:00〜17:00前後。会期やイベントで変更あり。</div>
+                <div><strong>定休日:</strong> 月曜休館や特別休館があることがある。</div>
+                <div><strong>入場料:</strong> 一般有料。学校・学生・子ども料金が設定される場合あり。</div>
+                <div><strong>無料日:</strong> 定期無料日があることもあるが、公式サイトで最新確認を推奨。</div>
               </div>
+              <div class="note">※ 学生やハーバード関係者は割引・無料の条件がある場合があります。</div>
             </article>
 
-            <article class="card spot-card">
-              <div class="spot-thumb">🏟️</div>
-              <div class="spot-info">
-                <div class="spot-type bu">ライブ</div>
-                <h3>FENWAY地区</h3>
-                <p>野球場やナイトライフの雰囲気があり、ボストンらしい都会の楽しさを感じられます。</p>
+            <article class="card museum-card">
+              <h3>MIT Museum</h3>
+              <div class="museum-meta">
+                <div><strong>営業時間:</strong> 一般的には 10:00〜17:00 前後。イベント開催時には延長あり。</div>
+                <div><strong>定休日:</strong> 月曜や特別休館があることがある。</div>
+                <div><strong>入場料:</strong> 一般有料。学生やMIT関係者は無料/割引の可能性あり。</div>
+                <div><strong>無料日:</strong> 定期無料イベントがある場合あり。常設無料日ではないため要確認。</div>
               </div>
-            </article>
-
-            <article class="card spot-card">
-              <div class="spot-thumb">🎓</div>
-              <div class="spot-info">
-                <div class="spot-type bu">生活</div>
-                <h3>ボストン大学キャンパス</h3>
-                <p>カフェや食事処が多く、街歩きと学園雰囲気を一日で楽しみやすいエリアです。</p>
-              </div>
+              <div class="note">※ 公式サイトのカレンダーを事前確認すると安心です。</div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="courses">
+      <section id="freedom">
         <div class="container">
           <div class="section-heading">
-            <h2>おすすめモデルコース</h2>
-            <span class="section-tag">1 day plan</span>
+            <h2>無料で楽しむボストン・ウォーク</h2>
+            <span class="section-tag">Freedom Trail</span>
           </div>
 
-          <div class="course-grid">
-            <article class="card course-card">
-              <div class="course-time">09:30 - 12:00</div>
-              <h3>ハーバード編</h3>
-              <ol>
-                <li>ハーバード・ヤードを散策</li>
-                <li>建築と大学の空気を堪能</li>
-                <li>美術館でゆったり観光</li>
-              </ol>
-            </article>
+          <div class="detail-grid">
+            <div class="info-panel">
+              <h3>Freedom Trail（フリーダム・トレイル）</h3>
+              <div class="time-line">
+                <div class="time-item">
+                  <strong>開始</strong>
+                  <span>Boston Common（ボストン・コモン）からスタート。歩きやすいルートで、街の歴史を通りやすい。</span>
+                </div>
+                <div class="time-item">
+                  <strong>コース</strong>
+                  <span>Boston Common → Park Street Church → Old State House → Paul Revere House → Old North Church → Bunker Hill Monument など。</span>
+                </div>
+                <div class="time-item">
+                  <strong>料金</strong>
+                  <span>自分で歩く場合は基本無料。ガイド付きツアーは有料になることがある。</span>
+                </div>
+                <div class="time-item">
+                  <strong>おすすめ</strong>
+                  <span>朝の気持ちいい時間帯に歩くと、建物の立ち並びと街の雰囲気がよく見える。昼間でも十分楽しめる。</span>
+                </div>
+              </div>
+            </div>
 
-            <article class="card course-card">
-              <div class="course-time">12:30 - 16:00</div>
-              <h3>MIT編</h3>
-              <ol>
-                <li>MITの建築群を見学</li>
-                <li>インフィニット・コリドー散策</li>
-                <li>ケンドールスクウェアでランチ</li>
-              </ol>
-            </article>
-
-            <article class="card course-card">
-              <div class="course-time">17:00 - 20:00</div>
-              <h3>ボストン大学編</h3>
-              <ol>
-                <li>BUブリッジで夕景を楽しむ</li>
-                <li>川沿いを散歩</li>
-                <li>FENWAY地区で夜の街を満喫</li>
-              </ol>
-            </article>
+            <div class="map-panel">
+              <div style="padding: 18px 18px 0;">
+                <h3 style="margin:0; font-size: 1.35rem;">無料ツアー情報</h3>
+              </div>
+              <div style="padding: 18px; display: grid; gap: 12px;">
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Boston+Common+Boston" target="_blank" rel="noreferrer">📍 Boston Common</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Old+State+House+Boston" target="_blank" rel="noreferrer">📍 Old State House</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Paul+Revere+House+Boston" target="_blank" rel="noreferrer">📍 Paul Revere House</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Old+North+Church+Boston" target="_blank" rel="noreferrer">📍 Old North Church</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Bunker+Hill+Monument+Boston" target="_blank" rel="noreferrer">📍 Bunker Hill Monument</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -801,14 +544,13 @@
         <div class="container">
           <div class="section-heading">
             <h2>エリアマップ</h2>
-            <span class="section-tag">Route map</span>
+            <span class="section-tag">Map</span>
           </div>
 
           <div class="map-wrap">
             <div class="map-panel">
-              <svg class="map-svg" viewBox="0 0 760 500" role="img" aria-label="Boston sightseeing route map">
+              <svg class="map-svg" viewBox="0 0 760 500" role="img" aria-label="Boston travel guide map">
                 <rect x="0" y="0" width="760" height="500" fill="#eff6ff"/>
-
                 <path d="M120 165 C180 120, 250 110, 330 135 L385 180 L360 220 L310 260 L220 285 L150 260 L95 215 Z" fill="rgba(29,78,216,0.08)" stroke="rgba(29,78,216,0.18)" stroke-width="2"/>
                 <path d="M360 120 C475 90, 575 140, 640 190 L700 265 L640 325 L540 340 L470 305 L375 240 Z" fill="rgba(14,165,233,0.08)" stroke="rgba(14,165,233,0.18)" stroke-width="2"/>
                 <path d="M120 300 C205 345, 280 365, 360 375 L365 445 L250 470 L120 440 L90 350 Z" fill="rgba(249,115,22,0.08)" stroke="rgba(249,115,22,0.18)" stroke-width="2"/>
@@ -817,56 +559,64 @@
                 <line x1="560" y1="240" x2="350" y2="375" stroke="rgba(75,85,99,0.35)" stroke-width="3" stroke-dasharray="8 8"/>
                 <line x1="560" y1="240" x2="660" y2="270" stroke="rgba(75,85,99,0.35)" stroke-width="3" stroke-dasharray="8 8"/>
 
-                <g>
-                  <circle cx="330" cy="150" r="16" fill="#7c3aed"/>
-                  <text x="330" y="156" text-anchor="middle" fill="white" font-size="12" font-weight="700">H</text>
-                  <text x="330" y="120" text-anchor="middle" fill="#7c3aed" font-size="18" font-weight="800">ハーバード</text>
-                </g>
+                <a href="https://www.google.com/maps/search/?api=1&query=Harvard+Yard+Boston" target="_blank" rel="noreferrer">
+                  <g>
+                    <circle cx="330" cy="150" r="16" fill="#7c3aed"/>
+                    <text x="330" y="156" text-anchor="middle" fill="white" font-size="12" font-weight="700">H</text>
+                    <text x="330" y="120" text-anchor="middle" fill="#7c3aed" font-size="18" font-weight="800">ハーバード</text>
+                  </g>
+                </a>
 
-                <g>
-                  <circle cx="560" cy="240" r="16" fill="#0ea5e9"/>
-                  <text x="560" y="246" text-anchor="middle" fill="white" font-size="12" font-weight="700">M</text>
-                  <text x="560" y="210" text-anchor="middle" fill="#0ea5e9" font-size="18" font-weight="800">MIT</text>
-                </g>
+                <a href="https://www.google.com/maps/search/?api=1&query=MIT+Boston" target="_blank" rel="noreferrer">
+                  <g>
+                    <circle cx="560" cy="240" r="16" fill="#0ea5e9"/>
+                    <text x="560" y="246" text-anchor="middle" fill="white" font-size="12" font-weight="700">M</text>
+                    <text x="560" y="210" text-anchor="middle" fill="#0ea5e9" font-size="18" font-weight="800">MIT</text>
+                  </g>
+                </a>
 
-                <g>
-                  <circle cx="350" cy="375" r="16" fill="#f97316"/>
-                  <text x="350" y="381" text-anchor="middle" fill="white" font-size="12" font-weight="700">B</text>
-                  <text x="350" y="410" text-anchor="middle" fill="#f97316" font-size="18" font-weight="800">BU</text>
-                </g>
+                <a href="https://www.google.com/maps/search/?api=1&query=Boston+University+Boston" target="_blank" rel="noreferrer">
+                  <g>
+                    <circle cx="350" cy="375" r="16" fill="#f97316"/>
+                    <text x="350" y="381" text-anchor="middle" fill="white" font-size="12" font-weight="700">B</text>
+                    <text x="350" y="410" text-anchor="middle" fill="#f97316" font-size="18" font-weight="800">BU</text>
+                  </g>
+                </a>
 
-                <g>
-                  <circle cx="660" cy="270" r="14" fill="#0f172a"/>
-                  <text x="660" y="276" text-anchor="middle" fill="white" font-size="11" font-weight="700">L</text>
-                  <text x="660" y="240" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="800">空港</text>
-                </g>
+                <a href="https://www.google.com/maps/search/?api=1&query=Boston+Logan+International+Airport" target="_blank" rel="noreferrer">
+                  <g>
+                    <circle cx="660" cy="270" r="14" fill="#0f172a"/>
+                    <text x="660" y="276" text-anchor="middle" fill="white" font-size="11" font-weight="700">L</text>
+                    <text x="660" y="240" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="800">空港</text>
+                  </g>
+                </a>
               </svg>
             </div>
 
             <aside class="route-panel">
-              <h3>歩く順番の目安</h3>
-              <div class="route-list">
+              <h3>1日ごとのおすすめ順番</h3>
+              <div class="route-list-2">
                 <div class="route-item">
-                  <div class="route-num">1</div>
+                  <div class="num">1</div>
                   <div>
                     <strong>MIT</strong>
-                    <span>空港に近く、交通アクセスが良いので最初の拠点にしやすいです</span>
+                    <span>空港に近くアクセスが良いので、最初の拠点にしやすいです。</span>
                   </div>
                 </div>
 
                 <div class="route-item">
-                  <div class="route-num">2</div>
+                  <div class="num">2</div>
                   <div>
                     <strong>ハーバード大学</strong>
-                    <span>少し北寄りで上の方にあるため、次に上へ向かう形で回ると自然です</span>
+                    <span>少し上側にあるので、次に上へ向かう形で回ると自然です。</span>
                   </div>
                 </div>
 
                 <div class="route-item">
-                  <div class="route-num">3</div>
+                  <div class="num">3</div>
                   <div>
                     <strong>ボストン大学</strong>
-                    <span>左下にあるので、最後に街の雰囲気と夕景を楽しむのに向いています</span>
+                    <span>左下寄りにあるため、最後に夕方の景色と街歩きを楽しむとよいです。</span>
                   </div>
                 </div>
               </div>
@@ -879,46 +629,46 @@
         <div class="container">
           <div class="section-heading">
             <h2>空港からの公共交通機関</h2>
-            <span class="section-tag">MBTA Access</span>
+            <span class="section-tag">Airport Access</span>
           </div>
 
-          <div class="airport-grid">
-            <article class="card airport-card">
-              <h3>おすすめ1: Silver Line</h3>
+          <div class="tips-grid">
+            <div class="tips-panel">
+              <h3>おすすめ1：Silver Line</h3>
               <ul>
-                <li>ボストン・ロガン空港 → Airport Station</li>
+                <li>空港 → Airport Station</li>
                 <li>Silver Line SL1 で Downtown Crossing へ</li>
-                <li>そのまま地下鉄や徒歩で各エリアへ移動</li>
+                <li>そのあと Red Line / Green Line に乗り換え</li>
+                <li>MIT なら Kendall/MIT、Harvard なら Harvard 駅</li>
               </ul>
-              <div class="time">所要時間: 約25〜35分</div>
-            </article>
+            </div>
 
-            <article class="card airport-card">
-              <h3>おすすめ2: Blue Line</h3>
+            <div class="tips-panel">
+              <h3>おすすめ2：Blue Line</h3>
               <ul>
-                <li>空港駅から Blue Line に乗車</li>
-                <li>Government Center で乗換え</li>
-                <li>Green Line / Red Line で市内へ</li>
+                <li>空港駅から Blue Line に乗る</li>
+                <li>Government Center で乗り換える</li>
+                <li>市内中心部から各エリアへ移動</li>
+                <li>安くてわかりやすいルート</li>
               </ul>
-              <div class="time">所要時間: 約35〜45分</div>
-            </article>
+            </div>
 
-            <article class="card airport-card">
+            <div class="tips-panel">
               <h3>エリア別の目安</h3>
               <ul>
-                <li>MIT: 空港に一番近いエリア</li>
-                <li>ハーバード: 北側に少し離れている</li>
-                <li>BU: 南西寄りで、左下の位置に近い</li>
+                <li>MIT：最も空港に近く、アクセスが簡単</li>
+                <li>Harvard：北側、少し離れている</li>
+                <li>BU：南西寄り、最後に回るのに向く</li>
+                <li>移動は徒歩 + 地下鉄の組み合わせが楽</li>
               </ul>
-              <div class="time">おすすめ: SL1 + 地下鉄</div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="container">Boston Travel Guide — Harvard / MIT / Boston University</div>
+      <div class="container">Boston Travel Guide — Harvard / MIT / Boston University / Freedom Trail</div>
     </footer>
   </body>
 </html>
