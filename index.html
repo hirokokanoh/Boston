@@ -125,9 +125,10 @@
       .chip.harvard { background: rgba(124,58,237,0.12); color: var(--purple); }
       .chip.mit { background: rgba(14,165,233,0.12); color: var(--sky); }
       .chip.bu { background: rgba(249,115,22,0.12); color: var(--orange); }
+      .chip.plan { background: rgba(15,118,110,0.12); color: var(--secondary); }
 
       .area-banner {
-        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.7);
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.72);
       }
       .area-banner strong { display: block; font-size: 1.08rem; margin-bottom: 4px; }
       .area-banner small { color: var(--muted); }
@@ -177,7 +178,7 @@
       .spot-info h3 { margin: 0 0 8px; font-size: 1.2rem; }
       .spot-info p { margin: 0 0 12px; color: var(--muted); line-height: 1.7; font-size: 0.96rem; }
       .map-link, .meta-link {
-        display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 10px; border-radius: 10px; background: rgba(29,78,216,0.06); color: var(--primary); font-size: 0.78rem; font-weight: 800; border: 1px solid rgba(29,78,216,0.08);
+        display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 10px; border-radius: 10px; background: rgba(29,78,216,0.06); color: var(--primary); font-size: 0.82rem; font-weight: 800;
       }
       .map-link:hover, .meta-link:hover { background: rgba(29,78,216,0.12); }
 
@@ -190,7 +191,7 @@
       }
       .museum-meta strong { color: var(--text); }
       .note {
-        margin-top: 10px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.18); border-radius: 12px; padding: 10px 12px; color: #8a5600; font-size: 0.84rem; line-height: 1.6; font-weight: 700;
+        margin-top: 10px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.18); border-radius: 12px; padding: 10px 12px; color: #8a5600; font-size: 0.84rem; line-height: 1.6;
       }
 
       .map-wrap { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 20px; }
@@ -198,10 +199,23 @@
       .route-panel { padding: 22px 20px; }
       .route-panel h3 { margin: 0 0 14px; font-size: 1.35rem; }
       .route-list-2 { display: grid; gap: 12px; }
-      .route-item { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.75); padding: 12px; }
+      .route-item { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.75); padding: 12px 12px; }
       .route-item .num { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: rgba(29,78,216,0.08); color: var(--primary); font-weight: 900; }
       .route-item strong { display: block; margin-bottom: 3px; }
       .route-item span { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+      .spot-detail-grid {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 18px;
+      }
+      .spot-detail-card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 22px 20px;
+        box-shadow: 0 15px 30px rgba(15,23,42,0.04);
+      }
+      .spot-detail-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
+      .spot-detail-card p { margin: 0 0 14px; color: var(--muted); line-height: 1.7; }
+      .return-link {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 12px; border-radius: 10px; background: rgba(15,118,110,0.08); color: var(--secondary); font-size: 0.8rem; font-weight: 800;
+      }
 
       .tips-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
       .tips-panel { padding: 22px 20px; }
@@ -212,13 +226,13 @@
 
       @media (max-width: 980px) {
         .hero-card, .detail-grid, .map-wrap { grid-template-columns: 1fr; }
-        .spot-grid, .museum-grid, .tips-grid, .planner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .spot-grid, .museum-grid, .tips-grid, .planner-grid, .spot-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 680px) {
         .topbar-inner, .section-heading, .area-banner { flex-direction: column; align-items: flex-start; }
         .nav { width: 100%; }
         .nav a { flex: 1 1 auto; text-align: center; }
-        .spot-grid, .museum-grid, .tips-grid, .planner-grid { grid-template-columns: 1fr; }
+        .spot-grid, .museum-grid, .tips-grid, .planner-grid, .spot-detail-grid { grid-template-columns: 1fr; }
         .hero-copy { padding: 28px 20px; }
       }
     </style>
@@ -229,6 +243,7 @@
         <div class="brand">Boston Guide</div>
         <nav class="nav" aria-label="main menu">
           <a href="#planner">順番を選ぶ</a>
+          <a href="#combo">おすすめパターン</a>
           <a href="#harvard">ハーバード</a>
           <a href="#mit">MIT</a>
           <a href="#bu">ボストン大学</a>
@@ -247,8 +262,9 @@
               <div class="eyebrow">Flexible Boston Travel Guide</div>
               <h1>順番は自由。目的に合わせてエリアを選ぶ</h1>
               <p class="lead">
-                ハーバード美術館が無料の日があれば、その日に先にハーバードへ行く。MITが最初の拠点になるかもしれない。ボストン大学を夕方に回るか、朝に回るか。<br />
-                ボストンのエリアは固定順ではなく、空港アクセス・無料日・気分・移動距離で選ぶのが一番快適です。
+                ハーバード美術館が無料の日があれば、その日に先にハーバードへ行く。MITが最初の拠点になるかもしれない。ボストン大学は夕方の景色を楽しむために最後に回るのもいい。
+                ボストンの観光は、固定の「1日目・2日目・3日目」ではなく、無料日・空港アクセス・移動距離・時間帯で選ぶのが一番快適です。
+                その日の目的が決まれば、どの地域からでも出発できます。
               </p>
               <div class="hero-actions">
                 <a href="#planner" class="btn btn-primary">順番を選ぶ</a>
@@ -282,23 +298,55 @@
           <div class="planner-grid">
             <article class="planner-card">
               <div class="chip harvard">Harvard</div>
-              <h3>美術館や無料イベントの予定がある日</h3>
-              <p>ハーバード美術館や自然史博物館が無料・割引の条件に合う日は、朝早くからハーバードに行くのがベストです。</p>
+              <h3>無料日や美術館を優先したい</h3>
+              <p>ハーバード美術館や自然史博物館が無料・割引の条件に合う日は、朝にハーバードから回るのが一番効率的です。</p>
               <a class="meta-link" href="#harvard">ハーバードのおすすめを見る</a>
             </article>
 
             <article class="planner-card">
               <div class="chip mit">MIT</div>
-              <h3>アクセス重視・最初の観光場所にしたい日</h3>
-              <p>空港から最もアクセスしやすく、MITは最初の拠点に向いています。午前中に見て、午後に移動するのがスムーズです。</p>
+              <h3>空港アクセスを重視したい</h3>
+              <p>MIT は空港からのアクセスがよく、最初の拠点に向いています。午前中に回って、午後に他エリアへ移動するのがスムーズです。</p>
               <a class="meta-link" href="#mit">MITのおすすめを見る</a>
             </article>
 
             <article class="planner-card">
               <div class="chip bu">BU</div>
-              <h3>夕景・散歩・リラックスを優先したい日</h3>
-              <p>ボストン大学周辺は、夕方の川辺散歩と夜の街歩きに適しています。最後に回ると気分が良くなります。</p>
+              <h3>夕暮れと散歩を楽しみたい</h3>
+              <p>ボストン大学周辺は、夕方の川沿い散歩と夜の景色が特に良いので、最後に回ると満足度が高くなります。</p>
               <a class="meta-link" href="#bu">ボストン大学のおすすめを見る</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="combo">
+        <div class="container">
+          <div class="section-heading">
+            <h2>おすすめの組み合わせ</h2>
+            <span class="section-tag">3 patterns</span>
+          </div>
+
+          <div class="planner-grid">
+            <article class="planner-card">
+              <div class="chip plan">パターン1</div>
+              <h3>無料日を優先するなら</h3>
+              <p>ハーバード美術館や自然史博物館の無料日が合うなら、朝のハーバードを先に回るのがベストです。そのあとMITや市内へ移動して、午後を散策に充てます。</p>
+              <a class="meta-link" href="#harvard">Harvard → MIT の流れを見る</a>
+            </article>
+
+            <article class="planner-card">
+              <div class="chip plan">パターン2</div>
+              <h3>空港アクセス重視なら</h3>
+              <p>最初の観光をMITにするのが最も無理がありません。空港からのアクセスがよく、キャンパス散策とケンドールスクウェアが短時間で回しやすいです。</p>
+              <a class="meta-link" href="#mit">MIT → Harvard の流れを見る</a>
+            </article>
+
+            <article class="planner-card">
+              <div class="chip plan">パターン3</div>
+              <h3>夕景を楽しみたいなら</h3>
+              <p>ボストン大学周辺を最後に回ると、チャールズ川沿いの景色や夜の雰囲気を余裕を持って楽しめます。観光の締めにぴったりです。</p>
+              <a class="meta-link" href="#bu">BU → 川沿い散歩の流れを見る</a>
             </article>
           </div>
         </div>
@@ -333,7 +381,7 @@
               <div class="route-list">
                 <div class="route-step"><div class="n">1</div><p>空港からは Silver Line → Downtown Crossing → Red Line または Green Line で Harvard 駅へ。</p></div>
                 <div class="route-step"><div class="n">2</div><p>駅から徒歩 8〜12 分でハーバード・ヤード到着。</p></div>
-                <div class="route-step"><div class="n">3</div><p>MIT へは Red Line で 15〜20 分程度。</p></div>
+                <div class="route-step"><div class="n">3</div><p>MIT へは Red Line で 15〜20 分程度。BU には電車と徒歩で抜けやすい。</p></div>
               </div>
             </div>
 
@@ -342,10 +390,10 @@
                 <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
               </div>
               <div style="padding: 18px; display: grid; gap: 12px;">
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Harvard+Yard+Boston" target="_blank" rel="noreferrer">📍 ハーバード・ヤード</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Harvard+Museum+of+Art+Boston" target="_blank" rel="noreferrer">📍 ハーバード美術館</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Charles+River+Esplanade+Boston" target="_blank" rel="noreferrer">📍 チャールズ川沿い</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Smith+Campus+Center+Harvard+Boston" target="_blank" rel="noreferrer">📍 スミス・キャンパス・センター</a>
+                <a class="map-link" href="#harvard-spot" target="_self" rel="noreferrer">📍 ハーバード・ヤード</a>
+                <a class="map-link" href="#harvard-spot" target="_self" rel="noreferrer">📍 ハーバード美術館</a>
+                <a class="map-link" href="#harvard-spot" target="_self" rel="noreferrer">📍 チャールズ川沿い</a>
+                <a class="map-link" href="#harvard-spot" target="_self" rel="noreferrer">📍 スミス・キャンパス・センター</a>
               </div>
             </div>
           </div>
@@ -390,10 +438,10 @@
                 <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
               </div>
               <div style="padding: 18px; display: grid; gap: 12px;">
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Great+Dome+MIT+Boston" target="_blank" rel="noreferrer">📍 グレート・ドーム</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Infinite+Corridor+MIT+Boston" target="_blank" rel="noreferrer">📍 インフィニット・コリドー</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=MIT+Museum+Boston" target="_blank" rel="noreferrer">📍 MIT Museum</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kendall+Square+Boston" target="_blank" rel="noreferrer">📍 ケンドールスクウェア</a>
+                <a class="map-link" href="#mit-spot" target="_self" rel="noreferrer">📍 グレート・ドーム</a>
+                <a class="map-link" href="#mit-spot" target="_self" rel="noreferrer">📍 インフィニット・コリドー</a>
+                <a class="map-link" href="#mit-spot" target="_self" rel="noreferrer">📍 MIT Museum</a>
+                <a class="map-link" href="#mit-spot" target="_self" rel="noreferrer">📍 ケンドールスクウェア</a>
               </div>
             </div>
           </div>
@@ -438,10 +486,10 @@
                 <h3 style="margin:0; font-size: 1.35rem;">主要スポット</h3>
               </div>
               <div style="padding: 18px; display: grid; gap: 12px;">
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Boston+University+Bridge+Boston" target="_blank" rel="noreferrer">📍 BU ブリッジ</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Boston+University+Campus+Boston" target="_blank" rel="noreferrer">📍 ボストン大学キャンパス</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Fenway+Park+Boston" target="_blank" rel="noreferrer">📍 フェンウェイ地区</a>
-                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Charles+River+Boston" target="_blank" rel="noreferrer">📍 川沿い散歩</a>
+                <a class="map-link" href="#bu-spot" target="_self" rel="noreferrer">📍 BU ブリッジ</a>
+                <a class="map-link" href="#bu-spot" target="_self" rel="noreferrer">📍 ボストン大学キャンパス</a>
+                <a class="map-link" href="#bu-spot" target="_self" rel="noreferrer">📍 フェンウェイ地区</a>
+                <a class="map-link" href="#bu-spot" target="_self" rel="noreferrer">📍 川沿い散歩</a>
               </div>
             </div>
           </div>
@@ -462,7 +510,7 @@
                 <div><strong>営業時間:</strong> 通常 10:00〜17:00前後。季節やイベントで変動あり。</div>
                 <div><strong>定休日:</strong> 公式サイトで最新確認。</div>
                 <div><strong>入場料:</strong> 一般有料。学生・無料イベントの条件あり。</div>
-                <div><strong>無料日:</strong> 一定の無料日がある場合があるが、変動あり。</div>
+                <div><strong>無料日:</strong> 一定の無料日がある場合があるが、変動あり。公式確認を推奨。</div>
               </div>
               <div class="note">※ 無料日が合う日は、ハーバードを最初に回すのが効率的です。</div>
             </article>
@@ -504,7 +552,7 @@
               <h3>Freedom Trail（フリーダム・トレイル）</h3>
               <div class="time-line">
                 <div class="time-item"><strong>開始</strong><span>Boston Common（ボストン・コモン）からスタート。</span></div>
-                <div class="time-item"><strong>コース</strong><span>Boston Common → Park Street Church → Old State House → Paul Revere House → Old North Church → Bunker Hill Monument など。</span></div>
+                <div class="time-item"><strong>コース</strong><span>Boston Common → Park Street Church → Old State House → Paul Revere House → Old North Church → Bunker Hill Monument まで。</span></div>
                 <div class="time-item"><strong>料金</strong><span>自分で歩く場合は基本無料。ガイド付きは有料。</span></div>
                 <div class="time-item"><strong>おすすめ</strong><span>朝か夕方に歩くと、街の雰囲気がよく見える。</span></div>
               </div>
@@ -545,28 +593,28 @@
                 <line x1="560" y1="240" x2="350" y2="375" stroke="rgba(75,85,99,0.35)" stroke-width="3" stroke-dasharray="8 8"/>
                 <line x1="560" y1="240" x2="660" y2="270" stroke="rgba(75,85,99,0.35)" stroke-width="3" stroke-dasharray="8 8"/>
 
-                <a href="https://www.google.com/maps/search/?api=1&query=Harvard+Yard+Boston" target="_blank" rel="noreferrer">
+                <a href="#harvard-spot" target="_self">
                   <g>
                     <circle cx="330" cy="150" r="16" fill="#7c3aed"/>
                     <text x="330" y="156" text-anchor="middle" fill="white" font-size="12" font-weight="700">H</text>
                     <text x="330" y="120" text-anchor="middle" fill="#7c3aed" font-size="18" font-weight="800">ハーバード</text>
                   </g>
                 </a>
-                <a href="https://www.google.com/maps/search/?api=1&query=MIT+Boston" target="_blank" rel="noreferrer">
+                <a href="#mit-spot" target="_self">
                   <g>
                     <circle cx="560" cy="240" r="16" fill="#0ea5e9"/>
                     <text x="560" y="246" text-anchor="middle" fill="white" font-size="12" font-weight="700">M</text>
                     <text x="560" y="210" text-anchor="middle" fill="#0ea5e9" font-size="18" font-weight="800">MIT</text>
                   </g>
                 </a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Boston+University+Boston" target="_blank" rel="noreferrer">
+                <a href="#bu-spot" target="_self">
                   <g>
                     <circle cx="350" cy="375" r="16" fill="#f97316"/>
                     <text x="350" y="381" text-anchor="middle" fill="white" font-size="12" font-weight="700">B</text>
                     <text x="350" y="410" text-anchor="middle" fill="#f97316" font-size="18" font-weight="800">BU</text>
                   </g>
                 </a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Boston+Logan+International+Airport" target="_blank" rel="noreferrer">
+                <a href="#airport" target="_self">
                   <g>
                     <circle cx="660" cy="270" r="14" fill="#0f172a"/>
                     <text x="660" y="276" text-anchor="middle" fill="white" font-size="11" font-weight="700">L</text>
@@ -579,11 +627,34 @@
             <aside class="route-panel">
               <h3>おすすめ順番の目安</h3>
               <div class="route-list-2">
-                <div class="route-item"><div class="num">1</div><div><strong>MIT</strong><span>アクセスがよく、最初の拠点に向く。</span></div></div>
-                <div class="route-item"><div class="num">2</div><div><strong>Harvard</strong><span>無料日や美術館と合えば、ここを優先。</span></div></div>
-                <div class="route-item"><div class="num">3</div><div><strong>BU</strong><span>夕方や夜に回ると一番気分が良い。</span></div></div>
+                <div class="route-item"><div class="num">1</div><div><strong>目的で選ぶ</strong><span>無料日なら Harvard、アクセス重視なら MIT、夕景なら BU。</span></div></div>
+                <div class="route-item"><div class="num">2</div><div><strong>移動を考える</strong><span>MIT は空港に近く、Harvard と BU は市内の移動で組み合わせやすい。</span></div></div>
+                <div class="route-item"><div class="num">3</div><div><strong>時間帯で調整</strong><span>朝に静かなエリア、夕方に川辺や景色を楽しむのが満足度が高い。</span></div></div>
               </div>
             </aside>
+          </div>
+
+          <div class="spot-detail-grid">
+            <article class="spot-detail-card" id="harvard-spot">
+              <div class="chip harvard">Harvard</div>
+              <h3>ハーバード・ヤード</h3>
+              <p>静かな学園の雰囲気と歴史ある建築が楽しめる場所です。無料日が合うなら、ここから朝の散策を始めるのが最も理想的です。</p>
+              <a class="return-link" href="#map">マップへ戻る</a>
+            </article>
+
+            <article class="spot-detail-card" id="mit-spot">
+              <div class="chip mit">MIT</div>
+              <h3>MIT キャンパス</h3>
+              <p>空港アクセスが良く、最初の観光地点として最適です。グレート・ドームとインフィニット・コリドーを歩くと、街の流れが一気に見えてきます。</p>
+              <a class="return-link" href="#map">マップへ戻る</a>
+            </article>
+
+            <article class="spot-detail-card" id="bu-spot">
+              <div class="chip bu">BU</div>
+              <h3>ボストン大学・川沿い</h3>
+              <p>夕方に訪れると、チャールズ川と街の景色が一番安定して美しく見えます。最後に回ると観光のまとめとして特におすすめです。</p>
+              <a class="return-link" href="#map">マップへ戻る</a>
+            </article>
           </div>
         </div>
       </section>
@@ -622,7 +693,7 @@
                 <li>MIT：最も空港に近い</li>
                 <li>Harvard：北側に少し離れる</li>
                 <li>BU：左下寄り、夕方に向く</li>
-                <li>移動は地鉄 + 徒歩が最適</li>
+                <li>移動は地下鉄 + 徒歩が最適</li>
               </ul>
             </div>
           </div>
